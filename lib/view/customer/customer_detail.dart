@@ -1,9 +1,11 @@
-import 'package:fin/Components/Colors.dart';
-import 'package:fin/Widgets/common_widget.dart';
+import 'package:fin/res/style/colors.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../widgets/customer_info_widget.dart';
 
 class CustomerDetails extends StatefulWidget {
   const CustomerDetails({super.key});

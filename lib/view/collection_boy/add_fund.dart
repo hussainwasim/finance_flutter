@@ -1,5 +1,5 @@
-import 'package:fin/Components/Colors.dart';
-import 'package:fin/Widgets/common_widget.dart';
+import 'package:fin/res/style/colors.dart';
+import 'package:fin/widgets/customer_info_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -96,25 +96,27 @@ class _addFundState extends State<addFund> {
                     keyboardType: TextInputType.number,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: ElevatedButton(
-                    onPressed: (() {}),
-                    child: Text(
-                      'ADD FUND',
-                      style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20,
-                        color: primaryWhite,
-                      )),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(333, 60),
-                        primary: primaryColor,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(66)),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: ElevatedButton(
+                      onPressed: (() {}),
+                      child: Text(
+                        'ADD FUND',
+                        style: GoogleFonts.inter(
+                            textStyle: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20,
+                          color: primaryWhite,
                         )),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size(333, 60),
+                          primary: primaryColor,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(66)),
+                          )),
+                    ),
                   ),
                 )
               ],

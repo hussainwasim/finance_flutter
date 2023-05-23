@@ -1,4 +1,4 @@
-import 'package:fin/Api_Models/BaseClients.dart';
+import 'package:fin/models/BaseClients.dart';
 
 class CustomerModel {
   static saveCustomer(
@@ -20,5 +20,6 @@ class CustomerModel {
       "starting_date": startingDate.toString(),
     };
     var response = await BaseClient().post('/customer', body);
+    return response;
   }
 }

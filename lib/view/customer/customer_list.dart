@@ -1,10 +1,10 @@
-import 'package:fin/Api_Models/BaseClients.dart';
-import 'package:fin/Components/Colors.dart';
-import 'package:fin/Screens/customer_detail.dart';
+import 'package:fin/res/style/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'customer_detail.dart';
 
 class CustomerList extends StatefulWidget {
   const CustomerList({super.key});
@@ -18,19 +18,19 @@ class _CustomerListState extends State<CustomerList> {
   //Future<CustomerListModel> futureCustomer = getCustomer();
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    var futureCustomer = getCustomer();
-    setState(() {
-      isLoading = true;
-    });
-  }
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   var futureCustomer = getCustomer();
+  //   setState(() {
+  //     isLoading = true;
+  //   });
+  // }
 
-  Future<CustomerListModel> getCustomer() async {
-    var response = await BaseClient().get('/customer');
-    return response;
-  }
+  // Future<CustomerListModel> getCustomer() async {
+  //   var response = await BaseClient().get('/customer');
+  //   return response;
+  // }
 
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,10 +1,11 @@
+import 'package:fin/view/collection_boy/add_fund.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:fin/res/style/colors.dart';
 
-import '../Components/Colors.dart';
-import '../Screens/customer_detail.dart';
+import '../view/customer/customer_detail.dart';
 
 class CustomerCard extends StatelessWidget {
   const CustomerCard({super.key});
@@ -162,67 +163,6 @@ class CustomerCard extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class CustomerList extends StatelessWidget {
-  const CustomerList({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 72,
-      width: 349,
-      decoration: BoxDecoration(
-        color: Color(0xFFEAEBF4),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: secondaryColor,
-          child: Text("hii"),
-        ),
-        title: Text(
-          "Vignesh S / 68541 ",
-          style: GoogleFonts.inter(
-              textStyle: const TextStyle(
-            color: Color(0xFF424242),
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-          )),
-        ),
-        subtitle: Row(
-          children: [
-            Text(
-              "Today Due ",
-              style: GoogleFonts.inter(
-                  textStyle: const TextStyle(
-                color: Color(0xFF424242),
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-              )),
-            ),
-            Text(
-              " 1420000 ",
-              style: TextStyle(
-                color: Color(0xFFFF7E7E),
-                fontSize: 12,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ],
-        ),
-        trailing: IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const CustomerDetails()),
-              );
-            },
-            icon: Icon(Icons.arrow_forward_ios)),
       ),
     );
   }

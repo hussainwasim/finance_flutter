@@ -1,12 +1,8 @@
-import 'package:fin/Components/Colors.dart';
-import 'package:fin/Screens/add_customer.dart';
-import 'package:fin/Screens/add_fund.dart';
-import 'package:fin/Screens/admin_dashboard.dart';
-import 'package:fin/Screens/collection_list.dart';
-import 'package:fin/Screens/customer_detail.dart';
-import 'package:fin/Screens/customer_list.dart';
-import 'package:fin/Screens/driver_dashboard.dart';
+import 'package:fin/view/login/login.dart';
 import 'package:flutter/material.dart';
+import 'res/style/colors.dart';
+import 'view/admin/admin_dashboard.dart';
+import 'view/collection_boy/driver_dashboard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,14 +23,11 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: primaryWhite,
       ),
       debugShowCheckedModeBanner: false,
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      //home: const CustomerDetails(),
-      //   home: const addFund(),
-      home: const CustomerList(),
-      //home: const CollectionList(),
-      // home: const DriverDashboard(),
-      //home: const AddCustomer(),
-      //home: const AdminDashboard(),
+
+//      home: const DriverDashboard(),
+
+      // home: const AdminDashboard(),
+      home: const LogIn(),
     );
   }
 }

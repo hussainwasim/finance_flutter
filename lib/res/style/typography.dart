@@ -1,4 +1,4 @@
-import 'package:fin/Components/Colors.dart';
+import 'package:fin/res/style/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

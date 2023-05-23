@@ -1,10 +1,11 @@
-import 'package:fin/Api_Models/BaseClients.dart';
-import 'package:fin/Api_Models/CustomerModel.dart';
-import 'package:fin/Components/Colors.dart';
+import 'package:fin/res/style/colors.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../utils/validator/my_validators.dart';
 
 class AddCustomer extends StatefulWidget {
   const AddCustomer({super.key});
@@ -28,23 +29,23 @@ class _AddCustomerState extends State<AddCustomer> {
   bool enable = true;
 
   //save customer fun
-  saveCustomer() async {
-    setState(() {
-      enable = false;
-    });
-    print(name);
-    if (_formkey.currentState!.validate()) {
-      await CustomerModel.saveCustomer(
-        name,
-        contactNo,
-        address,
-        dailyDueAmount,
-        loanAmount,
-        loanDuration,
-        startingDate,
-      );
-    }
-  }
+  // saveCustomer() async {
+  //   setState(() {
+  //     enable = false;
+  //   });
+  //   print(name);
+  //   if (_formkey.currentState!.validate()) {
+  //     await CustomerModel.saveCustomer(
+  //       name,
+  //       contactNo,
+  //       address,
+  //       dailyDueAmount,
+  //       loanAmount,
+  //       loanDuration,
+  //       startingDate,
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -75,32 +76,32 @@ class _AddCustomerState extends State<AddCustomer> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              width: 60,
-              height: 60,
-              child: Center(
-                  child: GestureDetector(
-                      onTap: () {},
-                      child: Image.asset('assets/images/image 4.png'))),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white54,
+        child: Form(
+          key: _formkey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                width: 60,
+                height: 60,
+                child: Center(
+                    child: GestureDetector(
+                        onTap: () {},
+                        child: Image.asset('assets/images/image 4.png'))),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white54,
+                ),
               ),
-            ),
-            Text("Profile Picture",
-                style: GoogleFonts.inter(
-                    textStyle: const TextStyle(
-                  fontWeight: FontWeight.w300,
-                  fontSize: 14,
-                  color: textPrimary,
-                ))),
-            Form(
-              key: _formkey,
-              child: Expanded(
+              Text("Profile Picture",
+                  style: GoogleFonts.inter(
+                      textStyle: const TextStyle(
+                    fontWeight: FontWeight.w300,
+                    fontSize: 14,
+                    color: textPrimary,
+                  ))),
+              Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
@@ -114,19 +115,22 @@ class _AddCustomerState extends State<AddCustomer> {
                             fontSize: 16,
                             color: textPrimary,
                           ))),
-                      TextField(
-                        controller: name,
-                        decoration: InputDecoration(
-                          hintText: "Enter Customer Name ",
-                          label: Text("Customer Name"),
-                          border: OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: textPrimary,
+                      TextFormField(
+                          controller: name,
+                          decoration: InputDecoration(
+                            hintText: "Enter Customer Name ",
+                            label: Text("Customer Name"),
+                            border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: textPrimary,
+                              ),
                             ),
                           ),
-                        ),
-                      ),
+                          validator: ((value) {
+                            MyValidators.validateEmptyFileds(
+                                value ?? '', 'Customer Name');
+                          })),
                       // TextField(
                       //   controller: email,
                       //   keyboardType: TextInputType.url,
@@ -148,7 +152,7 @@ class _AddCustomerState extends State<AddCustomer> {
                             fontSize: 16,
                             color: textPrimary,
                           ))),
-                      TextField(
+                      TextFormField(
                         controller: contactNo,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
@@ -161,6 +165,10 @@ class _AddCustomerState extends State<AddCustomer> {
                             ),
                           ),
                         ),
+                        validator: (value) {
+                          MyValidators.ValidateContact(
+                              value ?? '', 'Mobile Number');
+                        },
                       ),
                       Text("Address",
                           style: GoogleFonts.inter(
@@ -169,7 +177,7 @@ class _AddCustomerState extends State<AddCustomer> {
                             fontSize: 16,
                             color: textPrimary,
                           ))),
-                      TextField(
+                      TextFormField(
                         controller: address,
                         decoration: InputDecoration(
                           hintText: "Enter Address",
@@ -181,6 +189,10 @@ class _AddCustomerState extends State<AddCustomer> {
                             ),
                           ),
                         ),
+                        validator: (value) {
+                          MyValidators.validateEmptyFileds(
+                              value ?? '', 'Address');
+                        },
                         maxLines: 3,
                       ),
                       Text("Loan Amount",
@@ -190,7 +202,7 @@ class _AddCustomerState extends State<AddCustomer> {
                             fontSize: 16,
                             color: textPrimary,
                           ))),
-                      TextField(
+                      TextFormField(
                         controller: loanAmount,
                         decoration: InputDecoration(
                           hintText: "Enter Loan Amount ",
@@ -202,6 +214,10 @@ class _AddCustomerState extends State<AddCustomer> {
                             ),
                           ),
                         ),
+                        validator: (value) {
+                          MyValidators.validateEmptyFileds(
+                              value ?? '', 'Loan Amount');
+                        },
                         keyboardType: TextInputType.number,
                       ),
                       Text("Daily Due Amount",
@@ -211,7 +227,7 @@ class _AddCustomerState extends State<AddCustomer> {
                             fontSize: 16,
                             color: textPrimary,
                           ))),
-                      TextField(
+                      TextFormField(
                         controller: dailyDueAmount,
                         decoration: InputDecoration(
                           hintText: "Enter Daily Loan Amount ",
@@ -223,6 +239,10 @@ class _AddCustomerState extends State<AddCustomer> {
                             ),
                           ),
                         ),
+                        validator: (value) {
+                          MyValidators.validateEmptyFileds(
+                              value ?? '', 'Daily Due Amount');
+                        },
                         keyboardType: TextInputType.number,
                       ),
                       // TextField(
@@ -255,7 +275,12 @@ class _AddCustomerState extends State<AddCustomer> {
                       // ),
                       ElevatedButton(
                           onPressed: (() {
-                            saveCustomer();
+                            // saveCustomer();
+                            if (_formkey.currentState!.validate()) {
+                              print("ok");
+                            } else {
+                              print('err');
+                            }
                           }),
                           style: ElevatedButton.styleFrom(
                               backgroundColor: primaryColor,
@@ -274,8 +299,8 @@ class _AddCustomerState extends State<AddCustomer> {
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

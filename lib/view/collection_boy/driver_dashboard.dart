@@ -1,12 +1,11 @@
-import 'package:fin/Components/Colors.dart';
-import 'package:fin/Components/typography.dart';
-import 'package:fin/Screens/add_customer.dart';
-import 'package:fin/Screens/collection_list.dart';
+import 'package:fin/res/style/colors.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../customer/add_customer.dart';
+import 'collection_list.dart';
 
 class DriverDashboard extends StatefulWidget {
   const DriverDashboard({super.key});
