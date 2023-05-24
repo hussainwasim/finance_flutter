@@ -1,11 +1,11 @@
-import 'package:fin/view/collection_boy/add_fund.dart';
+import 'package:fin/view/driver_dashbord/add_fund.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fin/res/style/colors.dart';
 
-import '../view/customer/customer_detail.dart';
+import '../view/admin_dashbord/customer_detail.dart';
 
 class CustomerCard extends StatelessWidget {
   const CustomerCard({super.key});

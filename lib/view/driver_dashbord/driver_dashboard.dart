@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../customer/add_customer.dart';
+import '../admin_dashbord/add_customer.dart';
 import 'collection_list.dart';
 
 class DriverDashboard extends StatefulWidget {

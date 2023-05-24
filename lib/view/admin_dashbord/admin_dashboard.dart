@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../customer/add_customer.dart';
+import 'add_customer.dart';
 
 class AdminDashboard extends StatefulWidget {
   const AdminDashboard({super.key});

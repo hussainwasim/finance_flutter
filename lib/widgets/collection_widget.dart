@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../res/style/colors.dart';
-import '../view/collection_boy/add_fund.dart';
-import '../view/customer/customer_detail.dart';
+import '../view/driver_dashbord/add_fund.dart';
+import '../view/admin_dashbord/customer_detail.dart';
 
 class CollectionCompleted extends StatelessWidget {
   const CollectionCompleted({super.key});
