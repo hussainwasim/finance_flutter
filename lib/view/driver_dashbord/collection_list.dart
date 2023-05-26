@@ -40,7 +40,7 @@ class _CollectionListState extends State<CollectionList> {
                 Tab(
                   child: Container(
                     height: 52,
-                    width: 171,
+                    width: 175,
                     child: Center(
                       child: Text("Completed",
                           style: GoogleFonts.inter(
@@ -57,7 +57,7 @@ class _CollectionListState extends State<CollectionList> {
                 Tab(
                     child: Container(
                   height: 52,
-                  width: 171,
+                  width: 175,
                   child: Center(
                     child: Text("Pending",
                         style: GoogleFonts.inter(

@@ -1,21 +1,31 @@
 import 'package:fin/res/style/colors.dart';
+import 'package:fin/view/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LogIn extends StatefulWidget {
-  const LogIn({super.key});
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
 
   @override
-  State<LogIn> createState() => _LogInState();
+  State<SignUp> createState() => SignUpState();
 }
 
-class _LogInState extends State<LogIn> {
+class SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back, color: textPrimary),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -30,7 +40,7 @@ class _LogInState extends State<LogIn> {
                   children: [
                     Row(
                       children: [
-                        Text("Login  ",
+                        Text("Register  ",
                             style: GoogleFonts.outfit(
                                 textStyle: const TextStyle(
                               fontSize: 18,
@@ -40,7 +50,7 @@ class _LogInState extends State<LogIn> {
                         Image.asset('assets/images/User.png'),
                       ],
                     ),
-                    Text("Welcome back , Joseph Vicky",
+                    Text("Welcome to our Financial App ",
                         style: GoogleFonts.outfit(
                             textStyle: const TextStyle(
                           fontSize: 14,
@@ -50,14 +60,47 @@ class _LogInState extends State<LogIn> {
                   ],
                 ),
                 Container(
-                  child: Image.asset('assets/images/login.png'),
-                ),
-                Container(
-                  height: 150,
+                  height: 350,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text("Name",
+                          style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: textPrimary,
+                          ))),
+                      SizedBox(
+                        height: 44,
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            fillColor: Color(0xFFD9D9D9),
+                            filled: true,
+                            hintText: "Enter your name",
+                            hintStyle: GoogleFonts.inter(
+                                textStyle: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w300,
+                              color: textPrimary,
+                            )),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                                borderRadius: BorderRadius.circular(36)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                                borderRadius: BorderRadius.circular(36)),
+                            border: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                                borderRadius: BorderRadius.circular(36)),
+                            //border: InputBorder.none
+                          ),
+                        ),
+                      ),
                       Text("Mobile Number",
                           style: GoogleFonts.inter(
                               textStyle: const TextStyle(
@@ -128,21 +171,43 @@ class _LogInState extends State<LogIn> {
                                 borderRadius: BorderRadius.circular(36)),
                           ),
                         ),
-                      )
+                      ),
+                      Text("Confirm Password",
+                          style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: textPrimary,
+                          ))),
+                      SizedBox(
+                        height: 44,
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            fillColor: Color(0xFFD9D9D9),
+                            filled: true,
+                            hintText: "Enter your confirm Password",
+                            hintStyle: GoogleFonts.inter(
+                                textStyle: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w300,
+                              color: textPrimary,
+                            )),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                                borderRadius: BorderRadius.circular(36)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                                borderRadius: BorderRadius.circular(36)),
+                            border: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                                borderRadius: BorderRadius.circular(36)),
+                          ),
+                        ),
+                      ),
                     ],
-                  ),
-                ),
-                Align(
-                  alignment: Alignment(1, 0),
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text("Forget Password ? ",
-                        style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: textPrimary,
-                        ))),
                   ),
                 ),
                 ElevatedButton(
@@ -152,7 +217,7 @@ class _LogInState extends State<LogIn> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
                   onPressed: () {},
-                  child: Text('Login ',
+                  child: Text('Register ',
                       style: GoogleFonts.outfit(
                           textStyle: const TextStyle(
                         fontSize: 15,
@@ -175,7 +240,7 @@ class _LogInState extends State<LogIn> {
                           color: Color(0xFFA39797),
                         ),
                       ),
-                      Text("Or Login with",
+                      Text("Or Signup with",
                           style: GoogleFonts.outfit(
                               textStyle: const TextStyle(
                             fontSize: 12,
@@ -213,21 +278,30 @@ class _LogInState extends State<LogIn> {
                   TextSpan(
                     children: [
                       TextSpan(
-                          text: " You Don’t have an account ?",
+                          text: " You have an account ?",
                           style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w300,
                             color: textPrimary,
                           ))),
-                      TextSpan(
-                          text: "  Sign up",
-                          style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                            color: textPrimary,
-                          ))),
+                      WidgetSpan(
+                          child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LogIn(),
+                              ));
+                        },
+                        child: Text("  Sign in",
+                            style: GoogleFonts.poppins(
+                                textStyle: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: textPrimary,
+                            ))),
+                      )),
                     ],
                   ),
                 )

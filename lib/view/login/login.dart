@@ -1,4 +1,6 @@
 import 'package:fin/res/style/colors.dart';
+import 'package:fin/view/driver_dashbord/driver_dashboard.dart';
+import 'package:fin/view/signup/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -151,7 +153,12 @@ class _LogInState extends State<LogIn> {
                       primary: primaryColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => DriverDashboard())));
+                  },
                   child: Text('Login ',
                       style: GoogleFonts.outfit(
                           textStyle: const TextStyle(
@@ -221,13 +228,21 @@ class _LogInState extends State<LogIn> {
                             color: textPrimary,
                           ))),
                       WidgetSpan(
-                        child: Text("  Sign up",
-                            style: GoogleFonts.poppins(
-                                textStyle: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              color: textPrimary,
-                            ))),
+                        child: GestureDetector(
+                          onTap: (() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => SignUp())));
+                          }),
+                          child: Text("  Sign up",
+                              style: GoogleFonts.poppins(
+                                  textStyle: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: textPrimary,
+                              ))),
+                        ),
                       )
                     ],
                   ),

@@ -21,7 +21,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
       appBar: AppBar(
         centerTitle: true,
         leading: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(10.0),
           child: ClipOval(
             child: Image.network(
               'https://cdn.dribbble.com/users/1176657/screenshots/15468294/media/34af996ddff444391edab94abcf3c7f3.png?compress=1&resize=300x300',
@@ -95,7 +95,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     alignment: Alignment(0, 1),
                     child: Container(
                       height: 48,
-                      width: 316,
+                      width: 350,
                       decoration: BoxDecoration(
                         color: primaryWhite,
                         borderRadius: BorderRadius.circular(61),
@@ -172,7 +172,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -380,6 +380,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 ),
               ],
             ),
+            SizedBox(
+              height: 10,
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -436,6 +439,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 ],
               ),
             ),
+            // SizedBox(
+            //   height: 10,
+            // ),
             Padding(
               padding: const EdgeInsets.only(left: 15.0),
               child: Row(

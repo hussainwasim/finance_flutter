@@ -158,43 +158,50 @@ class _DriverDashboardState extends State<DriverDashboard> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
-                //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: Alignment(-1, 0),
-                    child: Text(
-                      "Total Collection Amount",
-                      style: TextStyle(
-                          color: Color(0xFFB2B2B4),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  Align(
+              child: Container(
+                height: 50,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
                       alignment: Alignment(-1, 0),
-                      child: RichText(
-                        text: TextSpan(
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            children: [
-                              TextSpan(
-                                  text: "12,05,000",
-                                  style: TextStyle(color: Color(0xFF000000))),
-                              TextSpan(
-                                  text: ".00/-",
-                                  style: TextStyle(color: Color(0xFFB1B1B1))),
-                              TextSpan(
-                                  text: "Year",
-                                  style: TextStyle(
-                                      color: Color(0xFFB1B1B1), fontSize: 16)),
-                            ]),
-                      )),
-                ],
+                      child: Text(
+                        "Total Collection Amount",
+                        style: TextStyle(
+                            color: Color(0xFFB2B2B4),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    Align(
+                        alignment: Alignment(-1, 0),
+                        child: RichText(
+                          text: TextSpan(
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              children: [
+                                TextSpan(
+                                    text: "₹ 12,05,000",
+                                    style: TextStyle(color: Color(0xFF000000))),
+                                TextSpan(
+                                    text: ".00/-",
+                                    style: TextStyle(color: Color(0xFFB1B1B1))),
+                                TextSpan(
+                                    text: "Year",
+                                    style: TextStyle(
+                                        color: Color(0xFFB1B1B1),
+                                        fontSize: 16)),
+                              ]),
+                        )),
+                  ],
+                ),
               ),
+            ),
+            SizedBox(
+              height: 5,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -303,7 +310,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                   color: lightColor, borderRadius: BorderRadius.circular(5)),
             ),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -317,7 +324,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         "Danger",
@@ -350,7 +357,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         "Danger",
@@ -383,7 +390,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         "Danger",

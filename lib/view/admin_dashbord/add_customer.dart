@@ -78,228 +78,241 @@ class _AddCustomerState extends State<AddCustomer> {
         padding: const EdgeInsets.all(8.0),
         child: Form(
           key: _formkey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                width: 60,
-                height: 60,
-                child: Center(
-                    child: GestureDetector(
-                        onTap: () {},
-                        child: Image.asset('assets/images/image 4.png'))),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white54,
-                ),
-              ),
-              Text("Profile Picture",
-                  style: GoogleFonts.inter(
-                      textStyle: const TextStyle(
-                    fontWeight: FontWeight.w300,
-                    fontSize: 14,
-                    color: textPrimary,
-                  ))),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Customer Name",
-                          style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            color: textPrimary,
-                          ))),
-                      TextFormField(
-                          controller: name,
-                          decoration: InputDecoration(
-                            hintText: "Enter Customer Name ",
-                            label: Text("Customer Name"),
-                            border: OutlineInputBorder(),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: textPrimary,
-                              ),
-                            ),
-                          ),
-                          validator: ((value) {
-                            MyValidators.validateEmptyFileds(
-                                value ?? '', 'Customer Name');
-                          })),
-                      // TextField(
-                      //   controller: email,
-                      //   keyboardType: TextInputType.url,
-                      //   decoration: InputDecoration(
-                      //     hintText: "Enter Customer Email ",
-                      //     label: Text("Email"),
-                      //     border: OutlineInputBorder(),
-                      //     focusedBorder: OutlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: textPrimary,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      Text("Mobile Number",
-                          style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            color: textPrimary,
-                          ))),
-                      TextFormField(
-                        controller: contactNo,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: "Enter Mobile Number",
-                          label: Text("Mobile Number"),
-                          border: OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: textPrimary,
-                            ),
-                          ),
-                        ),
-                        validator: (value) {
-                          MyValidators.ValidateContact(
-                              value ?? '', 'Mobile Number');
-                        },
-                      ),
-                      Text("Address",
-                          style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            color: textPrimary,
-                          ))),
-                      TextFormField(
-                        controller: address,
-                        decoration: InputDecoration(
-                          hintText: "Enter Address",
-                          label: Text("Address"),
-                          border: OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: textPrimary,
-                            ),
-                          ),
-                        ),
-                        validator: (value) {
-                          MyValidators.validateEmptyFileds(
-                              value ?? '', 'Address');
-                        },
-                        maxLines: 3,
-                      ),
-                      Text("Loan Amount",
-                          style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            color: textPrimary,
-                          ))),
-                      TextFormField(
-                        controller: loanAmount,
-                        decoration: InputDecoration(
-                          hintText: "Enter Loan Amount ",
-                          label: Text("Loan Amount"),
-                          border: OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: textPrimary,
-                            ),
-                          ),
-                        ),
-                        validator: (value) {
-                          MyValidators.validateEmptyFileds(
-                              value ?? '', 'Loan Amount');
-                        },
-                        keyboardType: TextInputType.number,
-                      ),
-                      Text("Daily Due Amount",
-                          style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            color: textPrimary,
-                          ))),
-                      TextFormField(
-                        controller: dailyDueAmount,
-                        decoration: InputDecoration(
-                          hintText: "Enter Daily Loan Amount ",
-                          label: Text("Daily Loan Amount"),
-                          border: OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: textPrimary,
-                            ),
-                          ),
-                        ),
-                        validator: (value) {
-                          MyValidators.validateEmptyFileds(
-                              value ?? '', 'Daily Due Amount');
-                        },
-                        keyboardType: TextInputType.number,
-                      ),
-                      // TextField(
-                      //   controller: loanDuration,
-                      //   decoration: InputDecoration(
-                      //     hintText: "Enter Loan Duration",
-                      //     label: Text('Loan Duration'),
-                      //     border: OutlineInputBorder(),
-                      //     focusedBorder: OutlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: textPrimary,
-                      //       ),
-                      //     ),
-                      //   ),
-                      //   keyboardType: TextInputType.number,
-                      // ),
-                      // TextField(
-                      //   controller: loanDuration,
-                      //   decoration: InputDecoration(
-                      //     hintText: "Enter Loan Starting Date",
-                      //     label: Text('Loan Starting Date'),
-                      //     border: OutlineInputBorder(),
-                      //     focusedBorder: OutlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: textPrimary,
-                      //       ),
-                      //     ),
-                      //   ),
-                      //   keyboardType: TextInputType.number,
-                      // ),
-                      ElevatedButton(
-                          onPressed: (() {
-                            // saveCustomer();
-                            if (_formkey.currentState!.validate()) {
-                              print("ok");
-                            } else {
-                              print('err');
-                            }
-                          }),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: primaryColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(66),
-                              ),
-                              minimumSize: Size(double.infinity, 60)),
-                          child: Text('ADD CUSTOMER',
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Container(
+              height: 660,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    width: 60,
+                    height: 60,
+                    child: Center(
+                        child: GestureDetector(
+                            onTap: () {},
+                            child: Image.asset('assets/images/image 4.png'))),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white54,
+                    ),
+                  ),
+                  Text("Profile Picture",
+                      style: GoogleFonts.inter(
+                          textStyle: const TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 14,
+                        color: textPrimary,
+                      ))),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Customer Name",
                               style: GoogleFonts.inter(
                                   textStyle: const TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 23,
-                                color: primaryWhite,
-                              )))),
-                    ],
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: textPrimary,
+                              ))),
+                          SizedBox(
+                            height: 50,
+                            child: TextFormField(
+                                controller: name,
+                                decoration: InputDecoration(
+                                  hintText: "Enter Customer Name ",
+                                  border: OutlineInputBorder(),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: textPrimary,
+                                    ),
+                                  ),
+                                ),
+                                validator: ((value) {
+                                  MyValidators.validateEmptyFileds(
+                                      value ?? '', 'Customer Name');
+                                })),
+                          ),
+                          // TextField(
+                          //   controller: email,
+                          //   keyboardType: TextInputType.url,
+                          //   decoration: InputDecoration(
+                          //     hintText: "Enter Customer Email ",
+                          //     label: Text("Email"),
+                          //     border: OutlineInputBorder(),
+                          //     focusedBorder: OutlineInputBorder(
+                          //       borderSide: BorderSide(
+                          //         color: textPrimary,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          Text("Mobile Number",
+                              style: GoogleFonts.inter(
+                                  textStyle: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: textPrimary,
+                              ))),
+                          SizedBox(
+                            height: 50,
+                            child: TextFormField(
+                              controller: contactNo,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                hintText: "Enter Mobile Number",
+                                border: OutlineInputBorder(),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: textPrimary,
+                                  ),
+                                ),
+                              ),
+                              validator: (value) {
+                                MyValidators.ValidateContact(
+                                    value ?? '', 'Mobile Number');
+                              },
+                            ),
+                          ),
+                          Text("Address",
+                              style: GoogleFonts.inter(
+                                  textStyle: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: textPrimary,
+                              ))),
+                          TextFormField(
+                            controller: address,
+                            decoration: InputDecoration(
+                              hintText: "Enter Address",
+                              border: OutlineInputBorder(),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: textPrimary,
+                                ),
+                              ),
+                            ),
+                            validator: (value) {
+                              MyValidators.validateEmptyFileds(
+                                  value ?? '', 'Address');
+                            },
+                            maxLines: 3,
+                          ),
+                          Text("Loan Amount",
+                              style: GoogleFonts.inter(
+                                  textStyle: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: textPrimary,
+                              ))),
+                          SizedBox(
+                            height: 50,
+                            child: TextFormField(
+                              controller: loanAmount,
+                              decoration: InputDecoration(
+                                hintText: "Enter Loan Amount ",
+                                border: OutlineInputBorder(),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: textPrimary,
+                                  ),
+                                ),
+                              ),
+                              validator: (value) {
+                                MyValidators.validateEmptyFileds(
+                                    value ?? '', 'Loan Amount');
+                              },
+                              keyboardType: TextInputType.number,
+                            ),
+                          ),
+                          Text("Daily Due Amount",
+                              style: GoogleFonts.inter(
+                                  textStyle: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: textPrimary,
+                              ))),
+                          SizedBox(
+                            height: 50,
+                            child: TextFormField(
+                              controller: dailyDueAmount,
+                              decoration: InputDecoration(
+                                hintText: "Enter Daily Loan Amount ",
+                                border: OutlineInputBorder(),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: textPrimary,
+                                  ),
+                                ),
+                              ),
+                              validator: (value) {
+                                MyValidators.validateEmptyFileds(
+                                    value ?? '', 'Daily Due Amount');
+                              },
+                              keyboardType: TextInputType.number,
+                            ),
+                          ),
+                          // TextField(
+                          //   controller: loanDuration,
+                          //   decoration: InputDecoration(
+                          //     hintText: "Enter Loan Duration",
+                          //     label: Text('Loan Duration'),
+                          //     border: OutlineInputBorder(),
+                          //     focusedBorder: OutlineInputBorder(
+                          //       borderSide: BorderSide(
+                          //         color: textPrimary,
+                          //       ),
+                          //     ),
+                          //   ),
+                          //   keyboardType: TextInputType.number,
+                          // ),
+                          // TextField(
+                          //   controller: loanDuration,
+                          //   decoration: InputDecoration(
+                          //     hintText: "Enter Loan Starting Date",
+                          //     label: Text('Loan Starting Date'),
+                          //     border: OutlineInputBorder(),
+                          //     focusedBorder: OutlineInputBorder(
+                          //       borderSide: BorderSide(
+                          //         color: textPrimary,
+                          //       ),
+                          //     ),
+                          //   ),
+                          //   keyboardType: TextInputType.number,
+                          // ),
+                          ElevatedButton(
+                              onPressed: (() {
+                                // saveCustomer();
+                                if (_formkey.currentState!.validate()) {
+                                  print("ok");
+                                } else {
+                                  print('err');
+                                }
+                              }),
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(66),
+                                  ),
+                                  minimumSize: Size(double.infinity, 45)),
+                              child: Text('ADD CUSTOMER',
+                                  style: GoogleFonts.inter(
+                                      textStyle: const TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 18,
+                                    color: primaryWhite,
+                                  )))),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

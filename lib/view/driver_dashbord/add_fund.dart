@@ -83,17 +83,20 @@ class _addFundState extends State<addFund> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(18.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Enter Due Amount',
-                      border: OutlineInputBorder(),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: textPrimary,
+                  child: SizedBox(
+                    height: 48,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Enter Due Amount',
+                        border: OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: textPrimary,
+                          ),
                         ),
                       ),
+                      keyboardType: TextInputType.number,
                     ),
-                    keyboardType: TextInputType.number,
                   ),
                 ),
                 Center(
@@ -106,12 +109,12 @@ class _addFundState extends State<addFund> {
                         style: GoogleFonts.inter(
                             textStyle: const TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20,
+                          fontSize: 18,
                           color: primaryWhite,
                         )),
                       ),
                       style: ElevatedButton.styleFrom(
-                          minimumSize: Size(333, 60),
+                          minimumSize: Size(333, 45),
                           primary: primaryColor,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(66)),
