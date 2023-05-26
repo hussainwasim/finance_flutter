@@ -1,6 +1,8 @@
+import 'package:fin/view/admin_dashbord/customer_detail.dart';
 import 'package:flutter/material.dart';
 import 'res/style/colors.dart';
 import 'view/admin_dashbord/admin_dashboard.dart';
+import 'view/admin_dashbord/customer_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: primaryWhite,
       ),
       debugShowCheckedModeBanner: false,
-      home: const AdminDashboard(),
+      home: CustomerList(),
       // home: const LogIn(),
     );
   }
