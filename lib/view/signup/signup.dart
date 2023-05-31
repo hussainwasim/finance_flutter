@@ -32,33 +32,28 @@ class SignUpState extends State<SignUp> {
           child: Container(
             margin: EdgeInsets.only(top: 25, bottom: 25),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        Text("Register  ",
-                            style: GoogleFonts.outfit(
-                                textStyle: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: textPrimary,
-                            ))),
-                        Image.asset('assets/images/User.png'),
-                      ],
-                    ),
-                    Text("Welcome to our Financial App ",
+                    Text("Register  ",
                         style: GoogleFonts.outfit(
                             textStyle: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xFF5B5B5B),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: textPrimary,
                         ))),
+                    Image.asset('assets/images/User.png'),
                   ],
                 ),
+                Text("Welcome to our Financial App ",
+                    style: GoogleFonts.outfit(
+                        textStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF5B5B5B),
+                    ))),
                 Container(
                   height: 350,
                   child: Column(
@@ -76,7 +71,7 @@ class SignUpState extends State<SignUp> {
                         height: 44,
                         child: TextFormField(
                           decoration: InputDecoration(
-                            fillColor: Color(0xFFD9D9D9),
+                            fillColor: Color(0xFFF1F0F3),
                             filled: true,
                             hintText: "Enter your name",
                             hintStyle: GoogleFonts.inter(
@@ -112,7 +107,7 @@ class SignUpState extends State<SignUp> {
                         height: 44,
                         child: TextFormField(
                           decoration: InputDecoration(
-                            fillColor: Color(0xFFD9D9D9),
+                            fillColor: Color(0xFFF1F0F3),
                             filled: true,
                             hintText: "Enter your mobile number",
                             hintStyle: GoogleFonts.inter(
@@ -148,7 +143,7 @@ class SignUpState extends State<SignUp> {
                         height: 44,
                         child: TextFormField(
                           decoration: InputDecoration(
-                            fillColor: Color(0xFFD9D9D9),
+                            fillColor: Color(0xFFF1F0F3),
                             filled: true,
                             hintText: "Enter your Password",
                             hintStyle: GoogleFonts.inter(
@@ -183,7 +178,7 @@ class SignUpState extends State<SignUp> {
                         height: 44,
                         child: TextFormField(
                           decoration: InputDecoration(
-                            fillColor: Color(0xFFD9D9D9),
+                            fillColor: Color(0xFFF1F0F3),
                             filled: true,
                             hintText: "Enter your confirm Password",
                             hintStyle: GoogleFonts.inter(
@@ -274,35 +269,37 @@ class SignUpState extends State<SignUp> {
                 SizedBox(
                   height: 10,
                 ),
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                          text: " You have an account ?",
-                          style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w300,
-                            color: textPrimary,
-                          ))),
-                      WidgetSpan(
-                          child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LogIn(),
-                              ));
-                        },
-                        child: Text("  Sign in",
+                Center(
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                            text: " You have an account ?",
                             style: GoogleFonts.poppins(
                                 textStyle: const TextStyle(
                               fontSize: 12,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w300,
                               color: textPrimary,
                             ))),
-                      )),
-                    ],
+                        WidgetSpan(
+                            child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LogIn(),
+                                ));
+                          },
+                          child: Text("  Sign in",
+                              style: GoogleFonts.poppins(
+                                  textStyle: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: textPrimary,
+                              ))),
+                        )),
+                      ],
+                    ),
                   ),
                 )
               ],

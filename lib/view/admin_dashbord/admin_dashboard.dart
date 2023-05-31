@@ -459,10 +459,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     child: Text("View all ",
                         style: GoogleFonts.inter(
                             textStyle: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 20,
-                          color: textPrimary,
-                        ))),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                                color: Color(0xFF737373)))),
                   )
                 ],
               ),
@@ -523,7 +522,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                                 textStyle: const TextStyle(
                                               fontWeight: FontWeight.w800,
                                               fontSize: 24,
-                                              color: Color(0xFFB1B1B1),
+                                              color: Color(0xFF9299A4),
                                             ))),
                                       ],
                                     ),

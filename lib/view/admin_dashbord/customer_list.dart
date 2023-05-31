@@ -32,7 +32,7 @@ class _CustomerListState extends State<CustomerList> {
   Future<CustomerModel> usersFuture = getUsers();
 
   static Future<CustomerModel> getUsers() async {
-    var url = "http://127.0.0.1:8000/api/customers/";
+    var url = "http://product.artsify.in/public/api/customers/";
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
@@ -86,21 +86,21 @@ class _CustomerListState extends State<CustomerList> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset(
-                              'assets/images/no_employee.jpeg',
-                              height: 180,
-                              width: 180,
-                            ),
+                            // Image.asset(
+                            //   'assets/images/no_employee.jpeg',
+                            //   height: 180,
+                            //   width: 180,
+                            // ),
                             const SizedBox(
                               height: 50,
                             ),
-                            const Text(
-                              'No Employee Found!',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xff002145)),
-                            ),
+                            // const Text(
+                            //   'No Employee Found!',
+                            //   style: TextStyle(
+                            //       fontSize: 20,
+                            //       fontWeight: FontWeight.w500,
+                            //       color: Color(0xff002145)),
+                            // ),
                             const SizedBox(
                               height: 30,
                             ),
