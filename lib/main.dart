@@ -1,4 +1,5 @@
 import 'package:fin/view/admin_dashbord/add_customer.dart';
+import 'package:fin/view/admin_dashbord/add_employee.dart';
 import 'package:fin/view/admin_dashbord/customer_detail.dart';
 import 'package:fin/view/admin_dashbord/employee_list.dart';
 import 'package:fin/view/driver_dashbord/add_fund.dart';
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: primaryWhite,
       ),
       debugShowCheckedModeBanner: false,
-      home: CustomerList(),
+      // home: CustomerList(),
+      home: AddEmployee(),
       //  home: AddCustomer(),
       //home: EmployeeList(),
       //home: const LogIn(),
