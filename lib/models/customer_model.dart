@@ -1,3 +1,9 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+import 'package:fin/models/BaseClients.dart';
+import 'package:flutter/src/widgets/editable_text.dart';
+
 class CustomerModel {
   String? message;
   bool? status;
@@ -27,6 +33,34 @@ class CustomerModel {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     return data;
+  }
+
+  static saveCustomer(name, contactNo, address, dailyDueAmount, loanAmount,
+      loanDuration) async {
+    Map<String, String> body = {
+      "name": name,
+      "contact_no": contactNo,
+      "address": address,
+      "loan_amount": loanAmount,
+      "daily_due_amount": dailyDueAmount,
+      "loan_duration": loanDuration,
+      // "company_zipcode": companyZipcode,
+    };
+    String jsonResponse;
+    var url = baseUrl + '/customers/';
+    // Map<String, String> headers = {'ContentType': 'application/json'};
+    var response = await BaseClient.post(url, body);
+
+    if (response.statusCode == 200) {
+      jsonResponse = response.body.toString();
+      Map notificationResult = jsonDecode(jsonResponse.toString());
+      return response = notificationResult as http.Response;
+    } else if (response.statusCode == 400) {
+      jsonResponse = response.body.toString();
+      throw Exception("Error while fetching. \n ${response.body}");
+    } else {
+      throw Exception("Error while fetching. \n ${response.body}");
+    }
   }
 }
 

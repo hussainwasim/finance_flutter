@@ -54,11 +54,11 @@ class CollectionCompleted extends StatelessWidget {
         ),
         trailing: IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const CustomerDetails()),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => const CustomerDetails(id: null,)),
+              // );
             },
             icon: Icon(Icons.arrow_forward_ios)),
       ),

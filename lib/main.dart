@@ -1,4 +1,7 @@
+import 'package:fin/view/admin_dashbord/add_customer.dart';
 import 'package:fin/view/admin_dashbord/customer_detail.dart';
+import 'package:fin/view/admin_dashbord/employee_list.dart';
+import 'package:fin/view/driver_dashbord/add_fund.dart';
 import 'package:flutter/material.dart';
 import 'res/style/colors.dart';
 import 'view/admin_dashbord/admin_dashboard.dart';
@@ -22,8 +25,11 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: primaryWhite,
       ),
       debugShowCheckedModeBanner: false,
-      // home: CustomerList(),
-      home: const LogIn(),
+      home: CustomerList(),
+      //  home: AddCustomer(),
+      //home: EmployeeList(),
+      //home: const LogIn(),
+      //home: const addFund(),
     );
   }
 }

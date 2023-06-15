@@ -1,10 +1,12 @@
 import 'package:fin/res/style/colors.dart';
+import 'package:fin/view/admin_dashbord/customer_list.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../models/customer_model.dart';
 import '../../utils/validator/my_validators.dart';
 
 class AddCustomer extends StatefulWidget {
@@ -20,32 +22,30 @@ class _AddCustomerState extends State<AddCustomer> {
   final TextEditingController contactNo = TextEditingController();
   final TextEditingController address = TextEditingController();
   final TextEditingController loanAmount = TextEditingController();
-
   final TextEditingController dailyDueAmount = TextEditingController();
   final TextEditingController loanDuration = TextEditingController();
-  final TextEditingController startingDate = TextEditingController();
+  //final TextEditingController startingDate = TextEditingController();
 
 //loading
   bool enable = true;
 
-  //save customer fun
-  // saveCustomer() async {
-  //   setState(() {
-  //     enable = false;
-  //   });
-  //   print(name);
-  //   if (_formkey.currentState!.validate()) {
-  //     await CustomerModel.saveCustomer(
-  //       name,
-  //       contactNo,
-  //       address,
-  //       dailyDueAmount,
-  //       loanAmount,
-  //       loanDuration,
-  //       startingDate,
-  //     );
-  //   }
-  // }
+  // save customer fun
+  saveCustomer() async {
+    setState(() {
+      enable = false;
+    });
+    print(name.text);
+    if (_formkey.currentState!.validate()) {
+      await CustomerModel.saveCustomer(
+        name.text,
+        contactNo.text,
+        address.text,
+        dailyDueAmount.text,
+        loanAmount.text,
+        loanDuration.text,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,11 @@ class _AddCustomerState extends State<AddCustomer> {
         elevation: 0,
         actions: [
           GestureDetector(
-              onTap: () {}, child: Image.asset('assets/images/menu.png'))
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CustomerList()));
+              },
+              child: Image.asset('assets/images/menu.png'))
         ],
       ),
       body: Padding(
@@ -79,6 +83,7 @@ class _AddCustomerState extends State<AddCustomer> {
         child: Form(
           key: _formkey,
           child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
             physics: BouncingScrollPhysics(),
             child: Container(
               height: 660,
@@ -256,20 +261,22 @@ class _AddCustomerState extends State<AddCustomer> {
                               keyboardType: TextInputType.number,
                             ),
                           ),
-                          // TextField(
-                          //   controller: loanDuration,
-                          //   decoration: InputDecoration(
-                          //     hintText: "Enter Loan Duration",
-                          //     label: Text('Loan Duration'),
-                          //     border: OutlineInputBorder(),
-                          //     focusedBorder: OutlineInputBorder(
-                          //       borderSide: BorderSide(
-                          //         color: textPrimary,
-                          //       ),
-                          //     ),
-                          //   ),
-                          //   keyboardType: TextInputType.number,
-                          // ),
+                          SizedBox(
+                            height: 50,
+                            child: TextField(
+                              controller: loanDuration,
+                              decoration: InputDecoration(
+                                hintText: "Enter Daily Loan Duration ",
+                                border: OutlineInputBorder(),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: textPrimary,
+                                  ),
+                                ),
+                              ),
+                              keyboardType: TextInputType.number,
+                            ),
+                          ),
                           // TextField(
                           //   controller: loanDuration,
                           //   decoration: InputDecoration(
@@ -286,7 +293,7 @@ class _AddCustomerState extends State<AddCustomer> {
                           // ),
                           ElevatedButton(
                               onPressed: (() {
-                                // saveCustomer();
+                                saveCustomer();
                                 if (_formkey.currentState!.validate()) {
                                   print("ok");
                                 } else {

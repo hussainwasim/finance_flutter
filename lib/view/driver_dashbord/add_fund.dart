@@ -1,6 +1,11 @@
+import 'dart:convert';
+
+import 'package:fin/models/BaseClients.dart';
 import 'package:fin/res/style/colors.dart';
 import 'package:fin/widgets/customer_info_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,6 +18,34 @@ class addFund extends StatefulWidget {
 }
 
 class _addFundState extends State<addFund> {
+  static const storage = FlutterSecureStorage();
+  bool isLoader = false;
+  final _formKey = GlobalKey<FormState>();
+  final addFund = TextEditingController();
+  _addFund() async {
+    var loginResponse = await storage.read(key: 'LOGIN_RESS');
+    setState(() {
+      isLoader = true;
+    });
+    Uri url = Uri.parse('http://product.artsify.in/public/api/loan/1/');
+    Map<String, String> header = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $loginResponse'
+    };
+    Map<String, dynamic> body = {
+      "daily_due_amount": addFund.text,
+    };
+    jsonEncode(body);
+    var response = await http.post(url, headers: header, body: body);
+    print(response.body);
+    if (response.statusCode == 200) {
+      print("success");
+    } else if (response.statusCode == 422) {
+      print('no');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,19 +116,23 @@ class _addFundState extends State<addFund> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(18.0),
-                  child: SizedBox(
-                    height: 48,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Enter Due Amount',
-                        border: OutlineInputBorder(),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: textPrimary,
+                  child: Form(
+                    key: _formKey,
+                    child: SizedBox(
+                      height: 48,
+                      child: TextField(
+                        controller: addFund,
+                        decoration: InputDecoration(
+                          hintText: 'Enter Due Amount',
+                          border: OutlineInputBorder(),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: textPrimary,
+                            ),
                           ),
                         ),
+                        keyboardType: TextInputType.number,
                       ),
-                      keyboardType: TextInputType.number,
                     ),
                   ),
                 ),
@@ -103,7 +140,11 @@ class _addFundState extends State<addFund> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 15, right: 15),
                     child: ElevatedButton(
-                      onPressed: (() {}),
+                      onPressed: (() {
+                        if (_formKey.currentState!.validate() && !isLoader) {
+                          _addFund().whenComplete(() {});
+                        }
+                      }),
                       child: Text(
                         'ADD FUND',
                         style: GoogleFonts.inter(

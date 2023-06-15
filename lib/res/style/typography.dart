@@ -2,6 +2,22 @@ import 'package:fin/res/style/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+class SizeConfig {
+  static MediaQueryData? _mediaQueryData;
+  static double? screenWidth;
+  static double? screenHeight;
+  static double? blockSizeHorizontal;
+  static double? blockSizeVertical;
+  void init(BuildContext context) {
+    _mediaQueryData = MediaQuery.of(context);
+    screenWidth = _mediaQueryData!.size.width;
+    screenHeight = _mediaQueryData!.size.height;
+    screenWidth = _mediaQueryData!.size.width;
+    blockSizeVertical = screenHeight! / 100;
+    blockSizeHorizontal = screenWidth! / 100;
+  }
+}
+
 class MyTestStyle {
   static TextStyle headline1 = GoogleFonts.inter(
       textStyle: const TextStyle(
