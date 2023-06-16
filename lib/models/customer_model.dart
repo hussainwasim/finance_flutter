@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:fin/models/BaseClients.dart';
-import 'package:flutter/src/widgets/editable_text.dart';
 
 class CustomerModel {
   String? message;

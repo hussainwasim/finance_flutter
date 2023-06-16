@@ -14,6 +14,7 @@ class CustomerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: khorizontalPadding),
       height: 262,

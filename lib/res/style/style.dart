@@ -21,7 +21,7 @@ const lightredbox = Color(0xFFfeeeee);
 // const greenbox = Color(0xFF34dede);
 // const redbox = Color(0xfff45656);
 
-final double khorizontalPadding = SizeConfig.blockSizeHorizontal! * 6;
+final double khorizontalPadding = SizeConfig.blockSizeHorizontal! * 4;
 
 final kQUestrialBold = GoogleFonts.questrial(
   fontWeight: FontWeight.w700,

@@ -88,6 +88,7 @@ class _CustomerDetailsState extends State<CustomerDetails> {
   }
 
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

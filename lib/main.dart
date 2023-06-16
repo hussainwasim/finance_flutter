@@ -3,6 +3,7 @@ import 'package:fin/view/admin_dashbord/add_employee.dart';
 import 'package:fin/view/admin_dashbord/customer_detail.dart';
 import 'package:fin/view/admin_dashbord/employee_list.dart';
 import 'package:fin/view/driver_dashbord/add_fund.dart';
+import 'package:fin/view/driver_dashbord/driver_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'res/style/colors.dart';
 import 'view/admin_dashbord/admin_dashboard.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       // home: CustomerList(),
-      home: AddEmployee(),
+      // home: AddEmployee(),
+      home: DriverDashboard(),
       //  home: AddCustomer(),
       //home: EmployeeList(),
       //home: const LogIn(),
