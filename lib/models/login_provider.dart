@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:fin/models/BaseClients.dart';
 import 'package:fin/view/admin_dashbord/admin_dashboard.dart';
 import 'package:fin/view/driver_dashbord/driver_dashboard.dart';
 import 'package:fin/view/view_model/user_model.dart';
@@ -25,6 +23,7 @@ class LoginProviderModel with ChangeNotifier {
     _loading = value;
     notifyListeners();
   }
+// mobile_no password
 
   Future<void> login(BuildContext context) async {
     setLoading(true);
@@ -33,8 +32,8 @@ class LoginProviderModel with ChangeNotifier {
       var response = await http.post(
           Uri.parse('http://product.artsify.in/public/api/signin'),
           body: ({
-            'mobile_no': mobileController.text,
-            'password': passwordController.text,
+            'password': '123456',
+            'mobile_no': '9874562',
           }));
       if (response.statusCode == 200) {
         String resBody = response.body.toString();
@@ -49,17 +48,19 @@ class LoginProviderModel with ChangeNotifier {
               key: 'LOGIN_RESS', value: resBodyMap['data']['token'].toString());
           await _storage.write(
               key: 'User_Id', value: resBodyMap['user']['id'].toString());
-          await StorageHelper.instance.setString(
+          await StorageHelper.instance?.setString(
               StorageHelperString.loginUserData,
               json.encode(loginResponseData.toJson()));
-          await StorageHelper.instance.setInt(StorageHelperString.loginUserType,
+          await StorageHelper.instance?.setInt(
+              StorageHelperString.loginUserType,
               loginResponseData.user?.role ?? 3);
           await StorageHelper.instance
-              .setBool(StorageHelperString.isUserLoggedIn, true);
+              ?.setBool(StorageHelperString.isUserLoggedIn, true);
+          // ignore: use_build_context_synchronously
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => loginResponseData.user?.role == 0
+              builder: (context) => loginResponseData.user?.role == 1
                   ? const AdminDashboard()
                   : const DriverDashboard(),
             ),

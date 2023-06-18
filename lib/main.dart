@@ -27,13 +27,13 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: primaryWhite,
       ),
       debugShowCheckedModeBanner: false,
-      home: const CustomerList(),
+      // home: const CustomerList(),
       // home: const AddEmployee(),
       // home: const AdminDashboard(),
-      //  home: const DriverDashboard(),
+      // home: const DriverDashboard(),
       //home: const AddCustomer(),
       //home: const EmployeeList(),
-      //home: const LogIn(),
+      home: const LogIn(),
       //home: const addFund(),
     );
   }

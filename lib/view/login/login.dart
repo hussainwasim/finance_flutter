@@ -1,24 +1,20 @@
 import 'package:fin/models/login_provider.dart';
 import 'package:fin/res/style/colors.dart';
-import 'package:fin/view/driver_dashbord/driver_dashboard.dart';
 import 'package:fin/view/signup/signup.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class LogIn extends StatefulWidget {
-  const LogIn({super.key});
-
+  const LogIn({Key? key}) : super(key: key);
   @override
   State<LogIn> createState() => _LogInState();
 }
 
 class _LogInState extends State<LogIn> {
   final _loginFormKey = GlobalKey<FormState>();
-  // TextEditingController mob = TextEditingController();
-  // TextEditingController pass = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -83,7 +79,6 @@ class _LogInState extends State<LogIn> {
                                       height: 44,
                                       child: TextFormField(
                                         controller: myModel.mobileController,
-                                        //  controller: mob,
                                         decoration: InputDecoration(
                                           fillColor: Color(0xFFF1F0F3),
                                           filled: true,
@@ -178,7 +173,7 @@ class _LogInState extends State<LogIn> {
                                       borderRadius: BorderRadius.circular(10))),
                               onPressed: () async {
                                 if (_loginFormKey.currentState?.validate() ??
-                                    false) {
+                                    true) {
                                   await myModel.login(context);
                                 }
                               },

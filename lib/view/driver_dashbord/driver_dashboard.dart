@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:fin/res/style/colors.dart';
 import 'package:fin/res/style/style.dart';
 import 'package:fin/res/style/typography.dart';
+import 'package:fin/view/admin_dashbord/customer_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -340,7 +341,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const CollectionList()),
+                            builder: (context) =>  CustomerList()),
                       );
                     },
                     child: Container(

@@ -1,18 +1,11 @@
 import 'dart:developer';
+import 'package:fin/utils/storage_helpers/storage_helpers_string.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Use strings to read and write for objects
-///
-/// You can use json.encode()/json.decode() method
-///
-/// for ex:
-/// ``` dart
-/// final stringNameList = json.encode([“x”, “y”, “z”]);
-/// final nameList = json.decode(stringNameList);
-/// ```
 abstract class StorageHelper {
   //? private storage object
-  static late final SharedPreferences instance;
+  static late SharedPreferences? instance;
 
   static Future<void> init() async {
     instance = await SharedPreferences.getInstance();
@@ -21,10 +14,10 @@ abstract class StorageHelper {
 
   //? to print all the available data
   static void logAllData() {
-    final keys = instance.getKeys();
-    for (final key in keys) {
+    final keys = instance?.getKeys();
+    for (final key in keys!) {
       log(
-        "$key : ${instance.get(key)}",
+        "$key : ${instance?.get(key)}",
         name: " 📦 Storage 📦 ",
       );
     }
@@ -32,8 +25,51 @@ abstract class StorageHelper {
 
   static Future<void> clearAllData() async {
     // CommonDialog.showLoadingDialog();
-    await instance.clear();
+    await instance?.clear();
     // CommonDialog.cancelDialog();
     // Get.offAll(LoginScreen());
   }
+
+  // static Future<bool> isPunchIn() async {
+  //   final now = DateTime.now();
+  //   final today = DateFormat('ddMMyyyy').format(now);
+  //   if (instance.getString(StorageHelperString.isPunchInDate) == today &&
+  //       instance.getBool(StorageHelperString.isPunchIn) == true) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+
+  // static Future<bool> isPunchOut() async {
+  //   final now = DateTime.now();
+  //   final today = DateFormat('ddMMyyyy').format(now);
+  //   if (instance.getString(StorageHelperString.isPunchOutDate) == today &&
+  //       instance.getBool(StorageHelperString.isPunchOut) == true) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+
+  // static Future<void> setPunchOut() async {
+  //   final now = DateTime.now();
+  //   final today = DateFormat('ddMMyyyy').format(now);
+  //   await instance.setString(StorageHelperString.isPunchOutDate, today);
+  //   await instance.setBool(StorageHelperString.isPunchOut, true);
+  // }
+
+  // static Future<void> setPunchIn() async {
+  //   final now = DateTime.now();
+  //   final today = DateFormat('ddMMyyyy').format(now);
+  //   await instance.setString(StorageHelperString.isPunchInDate, today);
+  //   await instance.setBool(StorageHelperString.isPunchIn, true);
+  // }
+
+  // static Future<void> clearPunchInOut() async {
+  //   await instance.remove(StorageHelperString.isPunchInDate);
+  //   await instance.remove(StorageHelperString.isPunchIn);
+  //   await instance.remove(StorageHelperString.isPunchOutDate);
+  //   await instance.remove(StorageHelperString.isPunchOut);
+  // }
 }
