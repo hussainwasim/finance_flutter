@@ -1,12 +1,12 @@
-class loan {
+class LoanModel {
   String? message;
   bool? status;
   int? code;
   List<Data>? data;
 
-  loan({this.message, this.status, this.code, this.data});
+  LoanModel({this.message, this.status, this.code, this.data});
 
-  loan.fromJson(Map<String, dynamic> json) {
+  LoanModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     status = json['status'];
     code = json['code'];

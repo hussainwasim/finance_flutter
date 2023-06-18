@@ -22,9 +22,8 @@ class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        // create: (_) => LoginProviderModel();
         create: (_) => LoginProviderModel(),
-        child: Consumer<LoginProviderModel>(builder: (context, value, child) {
+        child: Consumer<LoginProviderModel>(builder: (context, myModel, child) {
           return Stack(
             children: [
               Container(
@@ -64,6 +63,8 @@ class _LogInState extends State<LogIn> {
                             ),
                             Form(
                               key: _loginFormKey,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               child: Container(
                                 height: 150,
                                 child: Column(
@@ -81,7 +82,7 @@ class _LogInState extends State<LogIn> {
                                     SizedBox(
                                       height: 44,
                                       child: TextFormField(
-                                        controller: value.mobileController,
+                                        controller: myModel.mobileController,
                                         //  controller: mob,
                                         decoration: InputDecoration(
                                           fillColor: Color(0xFFF1F0F3),
@@ -122,7 +123,7 @@ class _LogInState extends State<LogIn> {
                                     SizedBox(
                                       height: 44,
                                       child: TextFormField(
-                                        controller: value.passwordController,
+                                        controller: myModel.passwordController,
                                         //controller: pass,
                                         decoration: InputDecoration(
                                           fillColor: Color(0xFFF1F0F3),
@@ -178,7 +179,7 @@ class _LogInState extends State<LogIn> {
                               onPressed: () async {
                                 if (_loginFormKey.currentState?.validate() ??
                                     false) {
-                                  await value.login(context);
+                                  await myModel.login(context);
                                 }
                               },
                               child: Text('Login ',
@@ -279,7 +280,16 @@ class _LogInState extends State<LogIn> {
                     ),
                   ),
                 ),
-              )
+              ),
+              if (myModel.loading)
+                const Opacity(
+                  opacity: 0.8,
+                  child: ModalBarrier(dismissible: false, color: Colors.black),
+                ),
+              if (myModel.loading)
+                const Center(
+                  child: CircularProgressIndicator(),
+                ),
             ],
           );
         }));

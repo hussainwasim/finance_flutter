@@ -39,7 +39,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
   }
 
   Map _dashboardData = {};
-  Map _dashboardUser = {};
+  // Map _dashboardUser = {};
   bool _isLoading = false;
 
   _fetchDashboardStats() async {
@@ -52,7 +52,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
       'Content-type': 'application/json',
       'Accept': 'application/json',
       'Authorization':
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzEwNjMxYTgwNjA0ZDFiZTkxZTRjMWJiZTE2OWJlYTJlMDAxNjUxYzQ3M2RlZTFlNDNhZjkyMmIzZTgyZDNhMjQ5MjJjMDkwYTM3MjBiNjYiLCJpYXQiOjE2ODY5MDcyOTYuMjc2OTE1MDczMzk0Nzc1MzkwNjI1LCJuYmYiOjE2ODY5MDcyOTYuMjc2OTE3OTM0NDE3NzI0NjA5Mzc1LCJleHAiOjE3MTg1Mjk2OTYuMjY5NjcwMDA5NjEzMDM3MTA5Mzc1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.AiQVwVNOaEpSC0HZOfRdZdyHPTXK8MH4Q_Zubmf2Ea6VtT1hpE7YTqsIsS8P2QFgmd0BVGt9jRvf7kHMsCwIVXk5f9DE93cr9arAuKgT8P93a5q7mDD14Oa9c8fPlWI1eNR28fM3dK5b_o09qqk6o4ybvqQIUEbUA2Cc8NUzMtod7XE1zcqYWzsOcs1omrnwTEsKblPHg53f_-s1e4vFz7ACw3i51gtMtqs8ZPi4_jprzp2kNKw0gCyEZb_Xv6n7YKoW3wIIQOHLdNeOrM6dkbbqBZ6W_JyE8Bs44DAcQgmqIvW8w9BFQ9nI9phGBpr25A0ZrvIXc0wXAKUMcRVG9QOchTOM0pLLXZLnLJ4cHIvyF9ES423QWovYvfRtCvqehsLdJiKdEiCuu-96EETeq9xieAPVfhwl_iiIQ5trAG4QArZJ6rnhYvOriTgu9ffOwb4R8C_W1kl-tMmehyUPbnHHm4CpVm54DFXdqPAhVDsog0HUa7YYeVt0P6XHjMjNFLtIlSvOssTezbs87Z5b0DDxXjG96yKZqdgVCwZbNAGJS2TGQif8M_ijVJezpC-2OlIBBUZqiUE6dsp4au_BGpFOPQQC3IdnY0twUCZ5RxXpvNttWO7BVbRNxEbtZsmYkTRlV-__FqqgIVJ46WZlMdyREaMaC6IT_LOzol_bzjs'
+          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZDAwY2NhZWRiZjcwOWJkNDgxNmY2ZDVhMWIxZjUxOTlmYmYxZjc4MDRjYjgxMzI3YzdmMmMxYWQyMjJkY2JjNGIwNTI1M2JhZjczZWU3ZTIiLCJpYXQiOjE2ODcwNzg3MzkuMzM2OTQ2MDEwNTg5NTk5NjA5Mzc1LCJuYmYiOjE2ODcwNzg3MzkuMzM2OTQ3OTE3OTM4MjMyNDIxODc1LCJleHAiOjE3MTg3MDExMzkuMzI3MjU1OTY0Mjc5MTc0ODA0Njg3NSwic3ViIjoiMiIsInNjb3BlcyI6W119.EVGef-z4ur3eBCB_NPMbYDrF16i9uZ1CP-JFijyy4eQv5HvKY9Gt3GBeXotRRO_nm2I5-RUYfvYhc6XIRfF1HqvTyUc6Tw2vuXzb-0FWzD6uMeZ05dN8CXlIXX_8Uce-xUpZHjjSD7EVVsi1kIdzfvhr7YYeoLcIXw6wceayq8DdU8uAT0yWFabvdOq_TzJb3d2l735_I9CDgiMwTMnwUesX2_InBo-IVqWJ5CqYn1zf7mO-KmW0kTbWq2Gx6MqXv0ZMZeM0MCEDAVW_AenVdq70SQyGpdTIQTZevYR3GaRz3t2Gb46nOdR3HaD5ZX8kitupGlnbtkntVn2UqyfAjcZrhOicIeblDV0C_JFn6lORmxhfUoNG02Hwu6W7-P5gEx-nHcn63VOSgCRRlLnOYLfpgzEu6FBJ0_hO4BxQgz7UuIxfT9pToYIqxm4otvMHIbAnFpqXkJYMXVWNg7QVi852vPm0DbSZHxpBQI2FByGDh-N5aQukOmOf2cNr_SiEiCS-Kx-8RheJQeZhIDsjnA6GqG9S1uOcR7WqlqTdp_q4IFGGEPwUOowR7-VAgiOyOkIjYltUDSUxWzMcu9nTbojb4wG_JUosNEO6b4_3WfyigxrlX85OnA2zww3kXUksAO3ndkUSlNMJvTMvAyuYlLROGiGoi-5MZvlFyjguZb8'
     };
     var response = await http.get(Uri.parse(url), headers: requestHeaders);
 
@@ -90,7 +90,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
           ),
         ),
         title: Text(
-          "Hi!${_dashboardData}",
+          "Hi! ${_dashboardData['user']}",
           style: GoogleFonts.inter(
               textStyle: const TextStyle(
             fontWeight: FontWeight.w600,
@@ -244,7 +244,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                           ),
                           children: [
                             TextSpan(
-                                text: "₹ 12,05,000",
+                                text: "₹ ${_dashboardData['totalCollection']}",
                                 style: TextStyle(color: Color(0xFF000000))),
                             TextSpan(
                                 text: ".00/-",
@@ -281,7 +281,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                                 color: Color(0xFF424242),
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500)),
-                        Text("₹ 1200000",
+                        Text("₹ ${_dashboardData['targetCollection']}",
                             style: TextStyle(
                                 color: Color(0xFFFF7E7E),
                                 fontSize: 18,
@@ -303,7 +303,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                                 color: Color(0xFF424242),
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500)),
-                        Text("₹ 1200000",
+                        Text("₹  ${_dashboardData['totalCollection']}",
                             style: TextStyle(
                                 color: Color(0xFF6DC576),
                                 fontSize: 18,

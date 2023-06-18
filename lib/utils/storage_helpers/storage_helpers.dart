@@ -1,8 +1,16 @@
 import 'dart:developer';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
-class StorageHelper {
+/// Use strings to read and write for objects
+///
+/// You can use json.encode()/json.decode() method
+///
+/// for ex:
+/// ``` dart
+/// final stringNameList = json.encode([“x”, “y”, “z”]);
+/// final nameList = json.decode(stringNameList);
+/// ```
+abstract class StorageHelper {
   //? private storage object
   static late final SharedPreferences instance;
 

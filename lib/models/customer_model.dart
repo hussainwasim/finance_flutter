@@ -45,10 +45,18 @@ class CustomerModel {
       "loan_duration": loanDuration,
       // "company_zipcode": companyZipcode,
     };
+    final jsonBody = jsonEncode(body);
     String jsonResponse;
-    var url = baseUrl + '/customers/';
-    // Map<String, String> headers = {'ContentType': 'application/json'};
-    var response = await BaseClient.post(url, body);
+    // var url = baseUrl + '/customers/';
+    Uri url = Uri.parse("https://product.artsify.in/public/api/customers/");
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization':
+          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYWIxZDI2NDRlZTA3MjQ1ZTc0OWZjMGQwODY0NjU5MjUzODFmZDViOGE4NjVjM2M3ZjFkOTc2MGEyODM1ZTY3NWI0NTNmNjE4NjMwNWE3OGYiLCJpYXQiOjE2ODY5OTIwNzMuOTYyMDczMDg3NjkyMjYwNzQyMTg3NSwibmJmIjoxNjg2OTkyMDczLjk2MjA3NDk5NTA0MDg5MzU1NDY4NzUsImV4cCI6MTcxODYxNDQ3My45NjExMDcwMTU2MDk3NDEyMTA5Mzc1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.xDE8hUgW3BaAtfuj6omFEbT_Ze84LpvHMDTDDoisft1MtphvmXSyNhv8TyiFNMcFQuHWOfn6mJVRPwiExRmA--zGsHUXBt2opYrbGohE2yIL8qZL6zI6H5x8S8Nq8WC_T4hudKgsNzASVGGAQHhYbG7jMXOYPlxOJjGTlD-kY87153oiNcibrK36wmD-7YFgjnQBRBwYsdv_tvyKIjgdu2TEgwBS2JU6VngsZKz9va-Vi2kTrnGW5nw8sA_OgndCMjzvkU95AI9XSnMG-da56etMpBTtwlA9F_g7xzVJCh48ANTFkxybKzOyjhXJzlhgllef-4Heb9K7pSbNPCOJJPRvEou3bAsns58PrPC0fsroBDuLrtxw5_heVdsVoWCM0ZOQPIo7a1zR4_72oE73guhBM67kNiJxCcLccqbrbZ-xyZf3JB7CdRswpJTcVWvz9rcagvP_T1dQ8UugOjj4rN0sWqTLe4PKytB1lDji7Lni37Z4BqVgvvlo2b62UDzyLLyOSIau6jDXXVwsC2e4XErSqfygMLzIfY9Hw9yD4CrIcE07icbTiJCzYkncMFBffnUFnHB5ppZdHWiw3xKjAvYiTtjdflGqOhqjFcF67wpnUffxtNOVKvxUxSSKJWupsBhEdxTxNSzxUi4DjVvElciV0ui0TE2nDkicK8-zbDI'
+    };
+    // var response = await BaseClient.post(url, body);
+    var response = await http.post(url, body: jsonBody, headers: headers);
 
     if (response.statusCode == 200) {
       jsonResponse = response.body.toString();

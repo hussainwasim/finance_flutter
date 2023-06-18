@@ -1,9 +1,13 @@
+import 'dart:convert';
+
+import 'package:fin/models/BaseClients.dart';
 import 'package:fin/res/style/colors.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 
 import 'add_customer.dart';
 
@@ -16,6 +20,48 @@ class AdminDashboard extends StatefulWidget {
 
 class _AdminDashboardState extends State<AdminDashboard> {
   @override
+  Map _dashboardData = {};
+  // Map _dashboardUser = {};
+  bool _isLoading = false;
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // _fetchUserData();
+    _fetchDashboardStats();
+  }
+
+  _fetchDashboardStats() async {
+    setState(() {
+      _isLoading = true;
+    });
+    // var loginResponse = await _storage.read(key: 'LOGIN_RESS');
+    String url = 'http://product.artsify.in/public/api/dashboard/';
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization':
+          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYmE3YzQ4MDM4MWM5MTZjNDczODIxYzhjZDQyMDVmNjBiY2Q2NmI4ZmM2MDRjMjg4M2Y1NzM0OGYzMzkzNmY0NWZkNGY4Y2I3NWZiZGY1NDciLCJpYXQiOjE2ODcwODA0ODcuMzUzNTkxOTE4OTQ1MzEyNSwibmJmIjoxNjg3MDgwNDg3LjM1MzU5NDA2NDcxMjUyNDQxNDA2MjUsImV4cCI6MTcxODcwMjg4Ny4zNDkzOTkwODk4MTMyMzI0MjE4NzUsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.Cnw-ColvvAtJsv2LHdxKIfWA1_cj-R2h0cDZFtwglXwT0nNrUdV_8Y0hBVv93spFy4x2LX_z2JC9BPD45-Wky2LZuItrmHik_sX52nOtKevFV-RB40swlLzcBd9uAtMSGRK3pxfeWScZFTei7pkb5A2_AjtJTsGCP2adVwAMjyL4RELPLq-7Bbi4SczNopIh4E_2qLpGBwCkFeDfVJKkkpMwm4bs4QfedBkTWNVvq-XqSMjubb5AbDbPOwOMFBxbu5s-v_dpMzntxdBRif8RC9zFti4AelAO8awS8KDg44fOReK0pQkiwHE8Eblo7_7MxlJG28Le11rXRKDCRr7jbj-6uT9xhyIMl2R1u--ygvpeBBGnRyjhrr4Zu2MwAVn7GfhOlKKC9Y5TBNWJiA3G6EoanKKhl4Od3yJ1IuCZ03ucyj-3ymSQ_wguaczK75jJdz3-ZMFn-KrB0Fy7r380-GTPbskDecVqrjSjhwySV3TyekquNpfTAJbT3m7w7kOvqaSFUwIOUC7VkWhMloRsmNTZkJoVRp8l54SuavBDn4Ktpn-0aDX-Ox5I0OcUW7iu2M6uC_WkYURGWYWZWuC93wr2yACTcsR3kD32SE-nPi_6j0JDaB8eeGQgj8Bg5vekgBf8d-mX1dyNPSfN99sF48WISpuCAjqXb_QHnfDgEx4'
+    };
+    var response = await http.get(Uri.parse(url), headers: requestHeaders);
+
+    if (response.statusCode == 200) {
+      Map resBodyMap = jsonDecode(response.body);
+      setState(() {
+        _dashboardData = resBodyMap['data'];
+        //_dashboardUser = resBodyMap['user'];
+        _isLoading = false;
+        print(_dashboardData);
+      });
+    } else {
+      print(response.statusCode);
+      print(response.body);
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -31,7 +77,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
           ),
         ),
         title: Text(
-          "Hi! Syed Hussain",
+          "Hi! ${_dashboardData["user"]}",
           style: GoogleFonts.inter(
               textStyle: const TextStyle(
             fontWeight: FontWeight.w600,
@@ -80,7 +126,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                           SizedBox(
                             height: 10,
                           ),
-                          Text("12,00,150000.00 ",
+                          Text("₹ ${_dashboardData['totalInvestment'] ?? 0}",
                               style: GoogleFonts.inter(
                                   textStyle: const TextStyle(
                                 fontWeight: FontWeight.w700,
@@ -125,7 +171,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                             Text.rich(
                               TextSpan(children: [
                                 WidgetSpan(
-                                  child: Text("12,00,150000.00 ",
+                                  child: Text(
+                                      "₹ ${_dashboardData['pending'] ?? 0}",
                                       style: GoogleFonts.inter(
                                           textStyle: const TextStyle(
                                         fontWeight: FontWeight.w700,
@@ -227,7 +274,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                           height: 21,
                           width: double.infinity,
                           child: Center(
-                            child: Text("12,00,400",
+                            child: Text(
+                                "₹ ${_dashboardData['yesterDayCollection'] ?? 0}",
                                 style: GoogleFonts.inter(
                                     textStyle: const TextStyle(
                                   fontWeight: FontWeight.w500,
@@ -294,7 +342,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                           height: 21,
                           width: double.infinity,
                           child: Center(
-                            child: Text("12,00,000",
+                            child: Text(
+                                "₹ ${_dashboardData['toDayCollection'] ?? 0}",
                                 style: GoogleFonts.inter(
                                     textStyle: const TextStyle(
                                   fontWeight: FontWeight.w500,
@@ -361,7 +410,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                           height: 21,
                           width: double.infinity,
                           child: Center(
-                            child: Text("12,00,000",
+                            child: Text(
+                                "₹ ${_dashboardData['tommorowTarget'] ?? 0} ",
                                 style: GoogleFonts.inter(
                                     textStyle: const TextStyle(
                                   fontWeight: FontWeight.w500,
@@ -403,7 +453,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     alignment: Alignment(-1, 0),
                     child: Row(
                       children: [
-                        Text("12,02,500",
+                        Text("₹ ${_dashboardData['netAmount']}",
                             style: GoogleFonts.inter(
                                 textStyle: const TextStyle(
                               fontWeight: FontWeight.w700,

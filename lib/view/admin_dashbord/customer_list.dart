@@ -39,7 +39,8 @@ class _CustomerListState extends State<CustomerList> {
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Bearer $loginResponse'
+      'Authorization':
+          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYmE3YzQ4MDM4MWM5MTZjNDczODIxYzhjZDQyMDVmNjBiY2Q2NmI4ZmM2MDRjMjg4M2Y1NzM0OGYzMzkzNmY0NWZkNGY4Y2I3NWZiZGY1NDciLCJpYXQiOjE2ODcwODA0ODcuMzUzNTkxOTE4OTQ1MzEyNSwibmJmIjoxNjg3MDgwNDg3LjM1MzU5NDA2NDcxMjUyNDQxNDA2MjUsImV4cCI6MTcxODcwMjg4Ny4zNDkzOTkwODk4MTMyMzI0MjE4NzUsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.Cnw-ColvvAtJsv2LHdxKIfWA1_cj-R2h0cDZFtwglXwT0nNrUdV_8Y0hBVv93spFy4x2LX_z2JC9BPD45-Wky2LZuItrmHik_sX52nOtKevFV-RB40swlLzcBd9uAtMSGRK3pxfeWScZFTei7pkb5A2_AjtJTsGCP2adVwAMjyL4RELPLq-7Bbi4SczNopIh4E_2qLpGBwCkFeDfVJKkkpMwm4bs4QfedBkTWNVvq-XqSMjubb5AbDbPOwOMFBxbu5s-v_dpMzntxdBRif8RC9zFti4AelAO8awS8KDg44fOReK0pQkiwHE8Eblo7_7MxlJG28Le11rXRKDCRr7jbj-6uT9xhyIMl2R1u--ygvpeBBGnRyjhrr4Zu2MwAVn7GfhOlKKC9Y5TBNWJiA3G6EoanKKhl4Od3yJ1IuCZ03ucyj-3ymSQ_wguaczK75jJdz3-ZMFn-KrB0Fy7r380-GTPbskDecVqrjSjhwySV3TyekquNpfTAJbT3m7w7kOvqaSFUwIOUC7VkWhMloRsmNTZkJoVRp8l54SuavBDn4Ktpn-0aDX-Ox5I0OcUW7iu2M6uC_WkYURGWYWZWuC93wr2yACTcsR3kD32SE-nPi_6j0JDaB8eeGQgj8Bg5vekgBf8d-mX1dyNPSfN99sF48WISpuCAjqXb_QHnfDgEx4'
     };
 
     final response = await http.get(Uri.parse(url), headers: requestHeaders);
@@ -88,7 +89,7 @@ class _CustomerListState extends State<CustomerList> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Image.asset(
-                                    'assets/images/no_employee.jpeg',
+                                    'assets/images/nodata.png',
                                     height: 180,
                                     width: 180,
                                   ),
@@ -96,7 +97,7 @@ class _CustomerListState extends State<CustomerList> {
                                     height: 50,
                                   ),
                                   const Text(
-                                    'No Employee Found!',
+                                    'Cutomer Not  Found!',
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w500,
@@ -143,7 +144,7 @@ class _CustomerListState extends State<CustomerList> {
                   return Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
-                    color: Colors.grey.withOpacity(0.5),
+                    color: Colors.white,
                     child: const Center(child: CircularProgressIndicator()),
                   );
                 },
