@@ -32,8 +32,8 @@ class LoginProviderModel with ChangeNotifier {
       var response = await http.post(
           Uri.parse('http://product.artsify.in/public/api/signin'),
           body: ({
-            'password': '123456',
-            'mobile_no': '9874562',
+            'password': passwordController.text,
+            'mobile_no': mobileController.text,
           }));
       if (response.statusCode == 200) {
         String resBody = response.body.toString();
@@ -61,8 +61,8 @@ class LoginProviderModel with ChangeNotifier {
             context,
             MaterialPageRoute(
               builder: (context) => loginResponseData.user?.role == 1
-                  ? const AdminDashboard()
-                  : const DriverDashboard(),
+                  ? const DriverDashboard()
+                  : const AdminDashboard(),
             ),
             (route) => false,
           );

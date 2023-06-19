@@ -26,8 +26,10 @@ class CustomerDetails extends StatefulWidget {
 class _CustomerDetailsState extends State<CustomerDetails> {
   bool isLoading = false;
   var usermap;
+  static const storage = FlutterSecureStorage();
 
   Future getUsers() async {
+    var loginResponse = await storage.read(key: 'LOGIN_RESS');
     setState(() {
       isLoading = true;
     });
@@ -37,8 +39,7 @@ class _CustomerDetailsState extends State<CustomerDetails> {
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
-      'Authorization':
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNDEwYTE5ODJlNjg0ODFlNjI5YmM1ODc3ZWI5NTJjZjIzNDRiZWU5ZjM5OTc1MDRiMmZjMGFkYWM1Mzc4NWUwMjFiOTM0ZTBlYzk4MWUzYmUiLCJpYXQiOjE2ODcxMDI3MDQuNDgzNjgxOTE3MTkwNTUxNzU3ODEyNSwibmJmIjoxNjg3MTAyNzA0LjQ4MzY4NDA2Mjk1Nzc2MzY3MTg3NSwiZXhwIjoxNzE4NzI1MTA0LjQ3MzYwODk3MDY0MjA4OTg0Mzc1LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.itjV58UgXzCqNRmf4Hn4HhRN3RYRJhQhtT3jTqHyGkx3uq4ZrewhpLwKHPhsbYKrPpGtkeISdNpu74XHaCWziRNI6a2jAwrtqvvn9Q4PwsSOuTXMCVlSDn8jjbKZpeL1xeVIKoj0-llT_WtQjTP1g7gDYt4YPEN3su2k3m-s0cv9t2KYRckEDO7YZyJl_BmUc3JGKZVJmS21pPp-UfloBrKlfZHo9vd3ZPSoL-2NO7hcP_cuKo_VwierDhWIpSFNBai_yTl0uy5QiOys80AeT9NopSiSdAXtUmECVJ8yghM4C0RZNhTcLMDneHeXgDTTjtIWDBD7uisT5XzsXv6SgWx6jjhfBt1IQZ3x-GFXJpdDtsr976V_C36nOL8hU_ilIFg8pdU0BX8HRWM4HY0UBeSqtpgYM2rt0nqWxy6WvH2DdNdM-sXj4awJPo1m5PhKRw_mfwviAtq66VpEkpRafTjd2FXeiD9SBL2_QskWLk4O_iNQx_OrQFXJQGpDX4_eXO6-wp7TQ07UWJ4Aakqm8bVhA07wyCDzjZii5XEaa64SbE5jQzeBZkIZeabb9gLQxhkGQoUwKsRZy4O7Q0qhsncg2jDQTB01GtHZi1UDRaVxsk1hhYttGSH9DSRL_999IeIhlYwTMLkPwSRaIFqdz2hAQ8jwk3JxiSFyt5Lu7Ic'
+      'Authorization': 'Bearer $loginResponse'
     };
     final response = await http.get(Uri.parse(url), headers: requestHeaders);
 

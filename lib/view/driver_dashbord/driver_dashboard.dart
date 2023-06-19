@@ -7,9 +7,16 @@ import 'package:fin/view/admin_dashbord/customer_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../models/BaseClients.dart';
+import '../../utils/storage_helpers/storage_helpers.dart';
+import '../../widgets/snackbar.dart';
 import '../admin_dashbord/add_customer.dart';
 import 'collection_list.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 class DriverDashboard extends StatefulWidget {
@@ -22,6 +29,7 @@ class DriverDashboard extends StatefulWidget {
 class _DriverDashboardState extends State<DriverDashboard> {
   @override
   Map _userData = {};
+  static const storage = FlutterSecureStorage();
   // _fetchUserData() async {
   //   var data = jsonDecode(
   //       StorageHelper.instance.getString(StorageHelperString.loginUserData) ??
@@ -47,13 +55,12 @@ class _DriverDashboardState extends State<DriverDashboard> {
     setState(() {
       _isLoading = true;
     });
-    // var loginResponse = await _storage.read(key: 'LOGIN_RESS');
+    var loginResponse = await storage.read(key: 'LOGIN_RESS');
     String url = 'http://product.artsify.in/public/api/dashboard/';
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
-      'Authorization':
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZDAwY2NhZWRiZjcwOWJkNDgxNmY2ZDVhMWIxZjUxOTlmYmYxZjc4MDRjYjgxMzI3YzdmMmMxYWQyMjJkY2JjNGIwNTI1M2JhZjczZWU3ZTIiLCJpYXQiOjE2ODcwNzg3MzkuMzM2OTQ2MDEwNTg5NTk5NjA5Mzc1LCJuYmYiOjE2ODcwNzg3MzkuMzM2OTQ3OTE3OTM4MjMyNDIxODc1LCJleHAiOjE3MTg3MDExMzkuMzI3MjU1OTY0Mjc5MTc0ODA0Njg3NSwic3ViIjoiMiIsInNjb3BlcyI6W119.EVGef-z4ur3eBCB_NPMbYDrF16i9uZ1CP-JFijyy4eQv5HvKY9Gt3GBeXotRRO_nm2I5-RUYfvYhc6XIRfF1HqvTyUc6Tw2vuXzb-0FWzD6uMeZ05dN8CXlIXX_8Uce-xUpZHjjSD7EVVsi1kIdzfvhr7YYeoLcIXw6wceayq8DdU8uAT0yWFabvdOq_TzJb3d2l735_I9CDgiMwTMnwUesX2_InBo-IVqWJ5CqYn1zf7mO-KmW0kTbWq2Gx6MqXv0ZMZeM0MCEDAVW_AenVdq70SQyGpdTIQTZevYR3GaRz3t2Gb46nOdR3HaD5ZX8kitupGlnbtkntVn2UqyfAjcZrhOicIeblDV0C_JFn6lORmxhfUoNG02Hwu6W7-P5gEx-nHcn63VOSgCRRlLnOYLfpgzEu6FBJ0_hO4BxQgz7UuIxfT9pToYIqxm4otvMHIbAnFpqXkJYMXVWNg7QVi852vPm0DbSZHxpBQI2FByGDh-N5aQukOmOf2cNr_SiEiCS-Kx-8RheJQeZhIDsjnA6GqG9S1uOcR7WqlqTdp_q4IFGGEPwUOowR7-VAgiOyOkIjYltUDSUxWzMcu9nTbojb4wG_JUosNEO6b4_3WfyigxrlX85OnA2zww3kXUksAO3ndkUSlNMJvTMvAyuYlLROGiGoi-5MZvlFyjguZb8'
+      'Authorization': 'Bearer $loginResponse'
     };
     var response = await http.get(Uri.parse(url), headers: requestHeaders);
 
@@ -72,6 +79,171 @@ class _DriverDashboardState extends State<DriverDashboard> {
         _isLoading = false;
       });
     }
+  }
+
+  //determine current location
+  Position? _currentPosition;
+  String? _currentAddress;
+
+  //handle location permission
+  Future<bool> _checkLocationPermission() async {
+    bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!isLocationServiceEnabled) {
+      Fluttertoast.showToast(
+          msg: 'Please enable location services',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      return false;
+    }
+
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.deniedForever) {
+      Fluttertoast.showToast(
+          msg:
+              'Location permissions are permanently denied, we cannot request permissions.',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      return false;
+    }
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        Fluttertoast.showToast(
+            msg: 'Location permissions are denied',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+        return false;
+      }
+    }
+
+    if (permission == LocationPermission.whileInUse ||
+        permission == LocationPermission.always) {
+      return await _getCurrentLocation();
+    }
+    return false;
+  }
+
+  //fetch current lat long
+  Future<bool> _getCurrentLocation() async {
+    Navigator.pop(context);
+    _dialogLoader();
+    final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    print(position);
+    setState(() {
+      _currentPosition = position;
+    });
+    return await _getAddressFromLatLng();
+  }
+
+  //fetch current address
+  Future<bool> _getAddressFromLatLng() async {
+    try {
+      List<Placemark> p = await placemarkFromCoordinates(
+          _currentPosition!.latitude, _currentPosition!.longitude);
+      Placemark place = p[0];
+
+      setState(() {
+        _currentAddress =
+            "${place.name}, ${place.subLocality}, ${place.locality}, ${place.subAdministrativeArea}, ${place.administrativeArea}, ${place.country}, ${place.postalCode}";
+      });
+      print(_currentAddress);
+      return true;
+    } catch (e) {
+      print(e);
+    }
+    return false;
+  }
+
+  _addPunchInPunchOutApi(bool isPunchIn) async {
+    var loginResponse = await storage.read(key: 'LOGIN_RESS');
+    var userData = await storage.read(key: 'User_Id');
+    String url = '${baseUrl}attendance/punch';
+    var body = {
+      'latitude': _currentPosition!.latitude,
+      'longitude': _currentPosition!.longitude,
+      'address': _currentAddress,
+      'employee_id': userData,
+      "status": isPunchIn ? "PUNCH_IN" : "PUNCH_OUT"
+    };
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $loginResponse'
+    };
+    var response = await http.post(Uri.parse(url),
+        headers: requestHeaders, body: jsonEncode(body));
+    print(response.body);
+    if (response.statusCode == 200) {
+      if (isPunchIn) {
+        Navigator.pop(context);
+        await StorageHelper.setPunchIn();
+        showDialog(
+            context: context,
+            builder: (context) => _showPunchInSucessFully(true));
+      } else {
+        Navigator.pop(context);
+        await StorageHelper.setPunchOut();
+        showDialog(
+            context: context,
+            builder: (context) => _showPunchInSucessFully(false));
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: 'Something went wrong',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  }
+
+  _dialogLoader() {
+    return showDialog(
+        context: context,
+        builder: (_) {
+          return Dialog(
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Container(
+              height: 200,
+              width: MediaQuery.of(context).size.width * .8,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Loading...',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 
   @override
@@ -188,28 +360,40 @@ class _DriverDashboardState extends State<DriverDashboard> {
                       ),
                     ],
                   ),
-                  Container(
-                    width: 62,
-                    height: 62,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                            onTap: () {},
-                            child: Image.asset('assets/images/punchin.png')),
-                        Text(
-                          "Check In",
-                          style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 7,
-                            color: Color(0xFF424242),
-                          )),
-                        )
-                      ],
+                  GestureDetector(
+                    onTap: () async {
+                      bool isPunchIn = await StorageHelper.isPunchIn();
+                      bool isPunchOut = await StorageHelper.isPunchOut();
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return _showPuchInPunchOutDialog(
+                                isPunchIn, isPunchOut);
+                          });
+                    },
+                    child: Container(
+                      width: 62,
+                      height: 62,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                              onTap: () {},
+                              child: Image.asset('assets/images/punchin.png')),
+                          Text(
+                            "Check In",
+                            style: GoogleFonts.inter(
+                                textStyle: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 7,
+                              color: Color(0xFF424242),
+                            )),
+                          )
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: primaryWhite),
                     ),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: primaryWhite),
                   )
                 ],
               ),
@@ -340,8 +524,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) =>  CustomerList()),
+                        MaterialPageRoute(builder: (context) => CustomerList()),
                       );
                     },
                     child: Container(
@@ -479,6 +662,171 @@ class _DriverDashboardState extends State<DriverDashboard> {
                 ),
               ],
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _showPuchInPunchOutDialog(bool isPunchIn, bool isPunchOut) {
+    return Dialog(
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Container(
+        height: 150,
+        width: MediaQuery.of(context).size.width * 0.8,
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Do you want to Log?',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Color(0xff002145),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    if (!isPunchIn) {
+                      await _checkLocationPermission().then((value) async {
+                        if (value) {
+                          await _addPunchInPunchOutApi(true);
+                        }
+                      });
+                    } else {
+                      Utils.showTopSnackBar('You are already Punched In');
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                      foregroundColor: primaryColor,
+                      backgroundColor:
+                          !isPunchIn ? Colors.green : Color(0xff002145),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      minimumSize: const Size(150, 40)),
+                  child: const Text(
+                    'Punch In',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (!isPunchOut) {
+                      await _checkLocationPermission().then((value) async {
+                        if (value) {
+                          await _addPunchInPunchOutApi(false);
+                        }
+                      });
+                    } else {
+                      Utils.showTopSnackBar('You are already Punched Out');
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                      foregroundColor: primaryWhite,
+                      backgroundColor: isPunchIn && !isPunchOut
+                          ? Colors.green
+                          : Color(0xff002145),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      minimumSize: const Size(150, 40)),
+                  child: const Text(
+                    'Punch Out',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _showPunchInSucessFully(bool isPunchIn) {
+    return Dialog(
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Container(
+        height: 200,
+        width: MediaQuery.of(context).size.width * 0.8,
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              isPunchIn ? 'Log In Successful!' : 'Log Out Successful!',
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Colors.green,
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            isPunchIn
+                ? Image.asset(
+                    'assets/images/punchin.png',
+                    width: 80,
+                    height: 80,
+                  )
+                : Image.asset(
+                    'assets/images/punchin.png',
+                    width: 80,
+                    height: 80,
+                  ),
+            const SizedBox(
+              height: 20,
+            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     if (isPunchIn) {
+            //       Navigator.pop(context);
+            //       Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //               builder: (context) => const AssignmentListPage()));
+            //     } else {
+            //       Navigator.pop(context);
+            //     }
+            //   },
+            //   style: ElevatedButton.styleFrom(
+            //       foregroundColor: primaryWhite,
+            //       backgroundColor: primaryColor,
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(30),
+            //       ),
+            //       minimumSize: const Size(150, 40)),
+            //   child: Text(
+            //     isPunchIn ? "My Job's" : 'DashBoard',
+            //     style: const TextStyle(
+            //       color: Colors.white,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

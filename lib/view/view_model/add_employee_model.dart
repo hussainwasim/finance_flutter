@@ -10,11 +10,12 @@ class AddEmployeeModel {
     password,
   ) async {
     const storage = FlutterSecureStorage();
+    var loginResponse = await storage.read(key: 'LOGIN_RESS');
     Map? desiredMap;
     var headers = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Bearer '
+      'Authorization': 'Bearer $loginResponse'
     };
     var request = http.MultipartRequest(
         'POST', Uri.parse('http://product.artsify.in/public/api/employees'));
