@@ -4,6 +4,7 @@ import 'package:fin/view/admin_dashbord/customer_detail.dart';
 import 'package:fin/view/admin_dashbord/employee_list.dart';
 import 'package:fin/view/driver_dashbord/add_fund.dart';
 import 'package:fin/view/driver_dashbord/driver_dashboard.dart';
+import 'package:fin/view/signup/signup.dart';
 import 'package:flutter/material.dart';
 import 'res/style/colors.dart';
 import 'view/admin_dashbord/admin_dashboard.dart';
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
       // home: const DriverDashboard(),
       //home: const AddCustomer(),
       //home: const EmployeeList(),
-      home: const LogIn(),
+      // home: const LogIn(),
+      home: const SignUp(),
       //home: const addFund(),
     );
   }

@@ -25,7 +25,7 @@ class CustomerDetails extends StatefulWidget {
 
 class _CustomerDetailsState extends State<CustomerDetails> {
   bool isLoading = false;
-  var usermap;
+  var usermap = {};
   static const storage = FlutterSecureStorage();
 
   Future getUsers() async {
@@ -146,53 +146,61 @@ class _CustomerDetailsState extends State<CustomerDetails> {
   }
 
   Widget buildUsers(usermap) => SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 69,
-              width: SizeConfig.screenWidth,
-              decoration: BoxDecoration(
-                color: Color(0xFFEAEBF4),
-                borderRadius: BorderRadius.circular(11),
-              ),
-              child: ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: secondaryColor,
-                  child: usermap['data']['name'] != null
-                      ? Text(
-                          "${usermap['data']['name'].toString()}",
-                          style: TextStyle(
-                              color: Color(0xFFEAEBF4),
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500),
-                        )
-                      : Text(''),
-                ),
-                title: Text("${usermap['data']['name'].toString()}",
-                    style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                      color: Color(0xFF1A2131),
-                    ))),
-                subtitle: Text("${usermap['data']['name'].toString()}",
-                    style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: textSecondary,
-                    ))),
-                trailing: Text("${usermap['data']['name'].toString()}",
-                    style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF019910),
-                    ))),
-              ),
-            ),
-          ],
-        ),
+      // child: ListView.separated(
+      //   shrinkWrap: true,
+      //   scrollDirection: Axis.vertical,
+      //   itemCount: usermap['data']['l_id']!.length,
+      //   itemBuilder: ((context, index) {
+      //     return Container(
+      //       height: 69,
+      //       width: SizeConfig.screenWidth,
+      //       decoration: BoxDecoration(
+      //         color: Color(0xFFEAEBF4),
+      //         borderRadius: BorderRadius.circular(11),
+      //       ),
+      //       child: ListTile(
+      //         leading: CircleAvatar(
+      //           backgroundColor: secondaryColor,
+      //           child: usermap.data![index]['l_id'] != null
+      //               ? Text(
+      //                   "${usermap.data![index]['l_id']}",
+      //                   style: TextStyle(
+      //                       color: Color(0xFFEAEBF4),
+      //                       fontSize: 15,
+      //                       fontWeight: FontWeight.w500),
+      //                 )
+      //               : Text(''),
+      //         ),
+      //         title: Text('Last Due :  ${usermap.data![index]['l_id']}',
+      //             style: GoogleFonts.inter(
+      //                 textStyle: const TextStyle(
+      //               fontWeight: FontWeight.w600,
+      //               fontSize: 16,
+      //               color: Color(0xFF1A2131),
+      //             ))),
+      //         subtitle: Text('Time : ${usermap.data![index]['l_id']}',
+      //             style: GoogleFonts.inter(
+      //                 textStyle: const TextStyle(
+      //               fontSize: 12,
+      //               fontWeight: FontWeight.w400,
+      //               color: textSecondary,
+      //             ))),
+      //         trailing: Text("₹ ${usermap.data![index]['l_id']}",
+      //             style: GoogleFonts.inter(
+      //                 textStyle: const TextStyle(
+      //               fontSize: 20,
+      //               fontWeight: FontWeight.w600,
+      //               color: Color(0xFF019910),
+      //             ))),
+      //       ),
+      //     );
+      //   }),
+      //   separatorBuilder: (BuildContext context, int index) {
+      //     return SizedBox(
+      //       height: 10,
+      //     );
+      //   },
+      // ),
       );
 }
 

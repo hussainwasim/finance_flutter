@@ -30,8 +30,8 @@ class _CustomerCardState extends State<CustomerCard> {
     setState(() {
       isLoading = true;
     });
-    var url =
-        'http://product.artsify.in/public/api/customers/1'; //widget.id.toString();
+    var url = 'http://product.artsify.in/public/api/customers/' +
+        widget.id.toString();
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
