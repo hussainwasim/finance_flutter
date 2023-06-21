@@ -7,8 +7,6 @@ import 'package:fin/models/loan_model.dart';
 import 'package:fin/res/style/colors.dart';
 import 'package:fin/res/style/typography.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -75,7 +73,7 @@ class _CustomerDetailsState extends State<CustomerDetails> {
               onPressed: (() {
                 Navigator.pop(context);
               }),
-              icon: Icon(Icons.arrow_back, color: textPrimary)),
+              icon: const Icon(Icons.arrow_back, color: textPrimary)),
           title: Text(
             "Customer Details",
             style: GoogleFonts.inter(

@@ -34,8 +34,8 @@ class MyApp extends StatelessWidget {
       // home: const DriverDashboard(),
       //home: const AddCustomer(),
       //home: const EmployeeList(),
-      // home: const LogIn(),
-      home: const SignUp(),
+      home: const LogIn(),
+      //home: const SignUp(),
       //home: const addFund(),
     );
   }
