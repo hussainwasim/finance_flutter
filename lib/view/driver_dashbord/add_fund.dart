@@ -34,7 +34,7 @@ class _addFundState extends State<addFund> {
       'Authorization': 'Bearer $loginResponse'
     };
     Map<String, dynamic> body = {
-      "daily_due_amount": addFund.text,
+      "collection_amount": addFund.text,
     };
 
     var response =

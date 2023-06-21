@@ -394,7 +394,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                       decoration: BoxDecoration(
                           shape: BoxShape.circle, color: primaryWhite),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

@@ -1,9 +1,19 @@
+import 'dart:convert';
+
+import 'package:fin/models/signup_model.dart';
 import 'package:fin/res/style/colors.dart';
 import 'package:fin/view/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import '../../utils/storage_helpers/storage_helpers.dart';
+import '../../utils/storage_helpers/storage_helpers_string.dart';
+import '../../widgets/snackbar.dart';
+import '../admin_dashbord/admin_dashboard.dart';
+import '../driver_dashbord/driver_dashboard.dart';
+import '../view_model/user_model.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -13,6 +23,22 @@ class SignUp extends StatefulWidget {
 }
 
 class SignUpState extends State<SignUp> {
+  bool isLoading = false;
+  final _formKey = GlobalKey<FormState>();
+  final name = TextEditingController();
+  final mobile = TextEditingController();
+  final password = TextEditingController();
+  final confirmPassword = TextEditingController();
+  signup() async {
+    setState(() {
+      isLoading = false;
+    });
+    print(name.text);
+    if (_formKey.currentState!.validate()) {
+      await SignUpModel.sign(name.text, mobile.text, password.text, context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,153 +82,160 @@ class SignUpState extends State<SignUp> {
                     ))),
                 Container(
                   height: 350,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Name",
-                          style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: textPrimary,
-                          ))),
-                      SizedBox(
-                        height: 44,
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            fillColor: Color(0xFFF1F0F3),
-                            filled: true,
-                            hintText: "Enter your name",
-                            hintStyle: GoogleFonts.inter(
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Name",
+                            style: GoogleFonts.inter(
                                 textStyle: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w300,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
                               color: textPrimary,
-                            )),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(36)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(36)),
-                            border: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(36)),
-                            //border: InputBorder.none
+                            ))),
+                        SizedBox(
+                          height: 44,
+                          child: TextFormField(
+                            controller: name,
+                            decoration: InputDecoration(
+                              fillColor: Color(0xFFF1F0F3),
+                              filled: true,
+                              hintText: "Enter your name",
+                              hintStyle: GoogleFonts.inter(
+                                  textStyle: const TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w300,
+                                color: textPrimary,
+                              )),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(36)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(36)),
+                              border: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(36)),
+                              //border: InputBorder.none
+                            ),
                           ),
                         ),
-                      ),
-                      Text("Mobile Number",
-                          style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: textPrimary,
-                          ))),
-                      SizedBox(
-                        height: 44,
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            fillColor: Color(0xFFF1F0F3),
-                            filled: true,
-                            hintText: "Enter your mobile number",
-                            hintStyle: GoogleFonts.inter(
+                        Text("Mobile Number",
+                            style: GoogleFonts.inter(
                                 textStyle: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w300,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
                               color: textPrimary,
-                            )),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(36)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(36)),
-                            border: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(36)),
-                            //border: InputBorder.none
+                            ))),
+                        SizedBox(
+                          height: 44,
+                          child: TextFormField(
+                            controller: mobile,
+                            decoration: InputDecoration(
+                              fillColor: Color(0xFFF1F0F3),
+                              filled: true,
+                              hintText: "Enter your mobile number",
+                              hintStyle: GoogleFonts.inter(
+                                  textStyle: const TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w300,
+                                color: textPrimary,
+                              )),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(36)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(36)),
+                              border: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(36)),
+                              //border: InputBorder.none
+                            ),
                           ),
                         ),
-                      ),
-                      Text("Password",
-                          style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: textPrimary,
-                          ))),
-                      SizedBox(
-                        height: 44,
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            fillColor: Color(0xFFF1F0F3),
-                            filled: true,
-                            hintText: "Enter your Password",
-                            hintStyle: GoogleFonts.inter(
+                        Text("Password",
+                            style: GoogleFonts.inter(
                                 textStyle: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w300,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
                               color: textPrimary,
-                            )),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(36)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(36)),
-                            border: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(36)),
+                            ))),
+                        SizedBox(
+                          height: 44,
+                          child: TextFormField(
+                            controller: password,
+                            decoration: InputDecoration(
+                              fillColor: Color(0xFFF1F0F3),
+                              filled: true,
+                              hintText: "Enter your Password",
+                              hintStyle: GoogleFonts.inter(
+                                  textStyle: const TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w300,
+                                color: textPrimary,
+                              )),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(36)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(36)),
+                              border: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(36)),
+                            ),
                           ),
                         ),
-                      ),
-                      Text("Confirm Password",
-                          style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: textPrimary,
-                          ))),
-                      SizedBox(
-                        height: 44,
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            fillColor: Color(0xFFF1F0F3),
-                            filled: true,
-                            hintText: "Enter your confirm Password",
-                            hintStyle: GoogleFonts.inter(
+                        Text("Confirm Password",
+                            style: GoogleFonts.inter(
                                 textStyle: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w300,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
                               color: textPrimary,
-                            )),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(36)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(36)),
-                            border: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(36)),
+                            ))),
+                        SizedBox(
+                          height: 44,
+                          child: TextFormField(
+                            controller: confirmPassword,
+                            decoration: InputDecoration(
+                              fillColor: Color(0xFFF1F0F3),
+                              filled: true,
+                              hintText: "Enter your confirm Password",
+                              hintStyle: GoogleFonts.inter(
+                                  textStyle: const TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w300,
+                                color: textPrimary,
+                              )),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(36)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(36)),
+                              border: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(36)),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 ElevatedButton(
@@ -211,7 +244,12 @@ class SignUpState extends State<SignUp> {
                       primary: primaryColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      print("ok");
+                    }
+                    signup();
+                  },
                   child: Text('Register ',
                       style: GoogleFonts.outfit(
                           textStyle: const TextStyle(
