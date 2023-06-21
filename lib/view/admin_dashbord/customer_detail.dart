@@ -158,37 +158,35 @@ class _CustomerDetailsState extends State<CustomerDetails> {
               child: ListTile(
                 leading: CircleAvatar(
                   backgroundColor: secondaryColor,
-                  child: usermap['data']['name'] != null
-                      ? Text(
-                          "${usermap['data']['name'].toString()}",
-                          style: TextStyle(
-                              color: Color(0xFFEAEBF4),
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500),
-                        )
-                      : Text(''),
+                  child: Text(
+                    "${usermap['data']['name'].toString()}",
+                    style: TextStyle(
+                        color: Color(0xFFEAEBF4),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500),
+                  ),
                 ),
-                title: Text("${usermap['data']['name'].toString()}",
-                    style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                      color: Color(0xFF1A2131),
-                    ))),
-                subtitle: Text("${usermap['data']['name'].toString()}",
-                    style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: textSecondary,
-                    ))),
-                trailing: Text("${usermap['data']['name'].toString()}",
-                    style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF019910),
-                    ))),
+                title: Text(
+                  "${usermap['data']['name'].toString()}",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 0, 26, 255),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500),
+                ),
+                subtitle: Text(
+                  "${usermap['data']['name'].toString()}",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 255, 225, 0),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500),
+                ),
+                trailing: Text(
+                  "${usermap['data']['name'].toString()}",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 0, 6, 60),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500),
+                ),
               ),
             ),
           ],

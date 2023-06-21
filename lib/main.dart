@@ -29,12 +29,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // home: const CustomerList(),
       // home: const AddEmployee(),
-      // home: const AdminDashboard(),
+      home: const AdminDashboard(),
       // home: const DriverDashboard(),
       //home: const AddCustomer(),
       //home: const EmployeeList(),
-      home: const LogIn(),
-      //home: const addFund(),
+      // home: const LogIn(),
+      // home: const addFund(),
     );
   }
 }

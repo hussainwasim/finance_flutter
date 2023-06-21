@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:fin/models/BaseClients.dart';
 import 'package:fin/res/style/colors.dart';
+import 'package:fin/view/admin_dashbord/add_employee.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -91,7 +92,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
           GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AddCustomer()));
+                    MaterialPageRoute(builder: (context) => AddEmployee()));
               },
               child: Image.asset('assets/images/add_emp.png')),
         ],
