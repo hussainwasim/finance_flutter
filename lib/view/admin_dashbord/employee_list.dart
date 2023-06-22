@@ -123,7 +123,7 @@ class _EmployeeListState extends State<EmployeeList> {
                     );
             }
           } else {
-            return Center(child: Text('no data'));
+            return const Center(child: CircularProgressIndicator());
           }
           return Container(
             width: MediaQuery.of(context).size.width,
@@ -175,7 +175,7 @@ class Data {
   String? employeeName;
   String? employeeNumber;
   String? email;
-  int? mobileNo;
+  String? mobileNo;
   String? profileUrl;
   String? employeeStatus;
 

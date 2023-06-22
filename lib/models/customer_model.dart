@@ -1,8 +1,13 @@
 import 'dart:convert';
+import 'package:fin/view/admin_dashbord/customer_list.dart';
+import 'package:fin/view/view_model/apiMethod.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:fin/models/BaseClients.dart';
+
+import '../widgets/snackbar.dart';
 
 class CustomerModel {
   String? message;
@@ -35,8 +40,8 @@ class CustomerModel {
     return data;
   }
 
-  static saveCustomer(name, contactNo, address, dailyDueAmount, loanAmount,
-      loanDuration) async {
+  static saveCustomer(BuildContext context, name, contactNo, address,
+      dailyDueAmount, loanAmount, loanDuration) async {
     const storage = FlutterSecureStorage();
     var loginResponse = await storage.read(key: 'LOGIN_RESS');
     Map<String, String> body = {
@@ -51,19 +56,24 @@ class CustomerModel {
     final jsonBody = jsonEncode(body);
     String jsonResponse;
     // var url = baseUrl + '/customers/';
-    Uri url = Uri.parse("https://product.artsify.in/public/api/customers/");
-    Map<String, String> headers = {
-      'Content-type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $loginResponse'
-    };
+    var url = "https://product.artsify.in/public/api/customers";
+
     // var response = await BaseClient.post(url, body);
-    var response = await http.post(url, body: jsonBody, headers: headers);
+    var response = await ApiMethods.post(url, body);
 
     if (response.statusCode == 200) {
       jsonResponse = response.body.toString();
       Map notificationResult = jsonDecode(jsonResponse.toString());
-      return response = notificationResult as http.Response;
+      Utils.showTopSnackSuccessBar(
+        "Customer Added Successfully",
+        title: 'Success',
+        color: Colors.green,
+      );
+      return Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CustomerList(),
+          ));
     } else if (response.statusCode == 400) {
       jsonResponse = response.body.toString();
       throw Exception("Error while fetching. \n ${response.body}");

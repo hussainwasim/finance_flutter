@@ -14,8 +14,8 @@ import 'package:http/http.dart' as http;
 import '../view/admin_dashbord/customer_detail.dart';
 
 class CustomerCard extends StatefulWidget {
-  final int? id;
-  const CustomerCard({super.key, this.id});
+  final int? id = 3;
+  const CustomerCard({super.key});
 
   @override
   State<CustomerCard> createState() => _CustomerCardState();
@@ -30,8 +30,8 @@ class _CustomerCardState extends State<CustomerCard> {
     setState(() {
       isLoading = true;
     });
-    var url = 'http://product.artsify.in/public/api/customers/' +
-        widget.id.toString();
+    var url = 'http://product.artsify.in/public/api/customers/1';
+    // widget.id.toString();
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
@@ -44,7 +44,7 @@ class _CustomerCardState extends State<CustomerCard> {
     if (response.statusCode == 200) {
       setState(() {
         //customerMap = body;
-        _customerData = data['data'];
+        _customerData = data['data'][1];
         isLoading = false;
       });
     } else {

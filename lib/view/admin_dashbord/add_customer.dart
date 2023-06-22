@@ -37,6 +37,7 @@ class _AddCustomerState extends State<AddCustomer> {
     print(name.text);
     if (_formkey.currentState!.validate()) {
       await CustomerModel.saveCustomer(
+        context,
         name.text,
         contactNo.text,
         address.text,

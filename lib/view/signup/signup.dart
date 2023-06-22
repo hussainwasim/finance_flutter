@@ -35,7 +35,8 @@ class SignUpState extends State<SignUp> {
     });
     print(name.text);
     if (_formKey.currentState!.validate()) {
-      await SignUpModel.sign(name.text, mobile.text, password.text, context);
+      await SignUpModel.sign(
+          name.text, mobile.text, password.text, confirmPassword.text, context);
     }
   }
 

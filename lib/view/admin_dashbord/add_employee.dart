@@ -1,16 +1,12 @@
 import 'package:fin/res/style/colors.dart';
-import 'package:fin/view/admin_dashbord/customer_list.dart';
 import 'package:fin/view/admin_dashbord/employee_list.dart';
 import 'package:fin/view/view_model/add_employee_model.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../models/customer_model.dart';
 import '../../utils/validator/my_validators.dart';
-import '../../widgets/snackbar.dart';
 
 class AddEmployee extends StatefulWidget {
   const AddEmployee({super.key});
@@ -22,11 +18,12 @@ class AddEmployee extends StatefulWidget {
 class _AddEmployeeState extends State<AddEmployee> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController name = TextEditingController();
-  final TextEditingController mobileNo = TextEditingController();
   final TextEditingController email = TextEditingController();
+
+  final TextEditingController mobileNo = TextEditingController();
+
   final TextEditingController address = TextEditingController();
   final TextEditingController password = TextEditingController();
-  final TextEditingController dob = TextEditingController();
 
   //final TextEditingController startingDate = TextEditingController();
   bool loader = false;
@@ -39,40 +36,18 @@ class _AddEmployeeState extends State<AddEmployee> {
     });
     if (_formKey.currentState!.validate() && !loader) {
       await AddEmployeeModel.saveEmployee(
+        context,
         name.text,
-        mobileNo.text,
         email.text,
+        mobileNo.text,
         address.text,
         password.text,
-      ).whenComplete(() {
-        Utils.showTopSnackBar('Employee added successfully',
-            title: 'Success', color: Colors.green);
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => EmployeeList()));
-      });
+      );
     }
     setState(() {
-      loader = true;
+      loader = false;
     });
   }
-
-  // save customer fun
-  // saveCustomer() async {
-  //   setState(() {
-  //     enable = false;
-  //   });
-  //   print(name.text);
-  //   if (_formkey.currentState!.validate()) {
-  //     await CustomerModel.saveCustomer(
-  //       name.text,
-  //       mobileNo.text,
-  //       address.text,
-  //       dailyDueAmount.text,
-  //       loanAmount.text,
-  //       loanDuration.text,
-  //     );
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -273,46 +248,31 @@ class _AddEmployeeState extends State<AddEmployee> {
                               },
                             ),
                           ),
-                          // TextField(
-                          //   controller: loanDuration,
-                          //   decoration: InputDecoration(
-                          //     hintText: "Enter Loan Starting Date",
-                          //     label: Text('Loan Starting Date'),
-                          //     border: OutlineInputBorder(),
-                          //     focusedBorder: OutlineInputBorder(
-                          //       borderSide: BorderSide(
-                          //         color: textPrimary,
-                          //       ),
-                          //     ),
-                          //   ),
-                          //   keyboardType: TextInputType.number,
-                          // ),
-                          ElevatedButton(
-                              onPressed: (() {
-                                // saveCustomer();
-                                // if (_formkey.currentState!.validate()) {
-                                //   print("ok");
-                                // } else {
-                                //   print('err');
-                                // }
-                                if (_formKey.currentState?.validate() ??
-                                    false) {
-                                  saveEmployee();
-                                }
-                              }),
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: primaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(66),
-                                  ),
-                                  minimumSize: Size(double.infinity, 45)),
-                              child: Text('ADD EMPLOYEE',
-                                  style: GoogleFonts.inter(
-                                      textStyle: const TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 18,
-                                    color: primaryWhite,
-                                  )))),
+
+                          !loader
+                              ? ElevatedButton(
+                                  onPressed: (() {
+                                    if (_formKey.currentState?.validate() ??
+                                        false) {
+                                      saveEmployee();
+                                    }
+                                  }),
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(66),
+                                      ),
+                                      minimumSize: Size(double.infinity, 45)),
+                                  child: Text('ADD EMPLOYEE',
+                                      style: GoogleFonts.inter(
+                                          textStyle: const TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 18,
+                                        color: primaryWhite,
+                                      ))))
+                              : Center(
+                                  child: CircularProgressIndicator(),
+                                )
                         ],
                       ),
                     ),
@@ -325,4 +285,48 @@ class _AddEmployeeState extends State<AddEmployee> {
       ),
     );
   }
+  // import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+// import 'package:http/http.dart' as http;
+
+// class AddEmployeeModel {
+//   // static saveEmployee(
+//   //   name,
+//   //   email,
+//   //   mobileNo,
+//   //   address,
+//   //   password,
+//   // ) async {
+//   //   const storage = FlutterSecureStorage();
+//   //   var loginResponse = await storage.read(key: 'LOGIN_RESS');
+//   //   // Map? desiredMap;
+//   //   var headers = {
+//   //     'Content-type': 'application/json',
+//   //     'Accept': 'application/json',
+//   //     'Authorization': 'Bearer $loginResponse'
+//   //   };
+//   //   var request = http.MultipartRequest(
+//   //       'POST', Uri.parse('https://product.artsify.in/public/api/employees'));
+//   //   request.fields.addAll({
+//   //     'employee_name': 'rarrxxja',
+//   //     'email': 'rajdrra@gmail.com',
+//   //     'mobile_no': '987456312',
+//   //     'address': 'dubai xmain road',
+//   //     'password': '1234567x8',
+//   //   });
+//   //   // if (empProfileFile != null) {
+//   //   //   request.files.add(
+//   //   //       await http.MultipartFile.fromPath('profile_url', empProfileFile));
+//   //   // }
+//   //   request.headers.addAll(headers);
+//   //   print("request:${request.fields}");
+//   //   http.StreamedResponse response = await request.send();
+//   //   print("response:${response.statusCode}");
+//   //   if (response.statusCode == 200) {
+//   //     print(await response.stream.bytesToString());
+//   //   } else {
+//   //     print(response.reasonPhrase);
+//   //     print(response);
+//   //   }
+//   // }
+// }
 }
