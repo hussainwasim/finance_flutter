@@ -46,7 +46,7 @@ class _addFundState extends State<addFund> {
     var response = await ApiMethods.post(url, body);
     print(response.body);
     if (response.statusCode == 200) {
-      Utils.showTopSnackSuccessBar("Add Due Amount Successfully");
+      // Utils.showTopSnackSuccessBar("Add Due Amount Successfully");
       return Navigator.push(
           context,
           MaterialPageRoute(
@@ -55,7 +55,8 @@ class _addFundState extends State<addFund> {
             ),
           ));
     } else if (response.statusCode == 422) {
-      Utils.showTopSnackBar("Something Wrong Try Again...");
+      print(response.toString());
+      //  Utils.showTopSnackBar("Something Wrong Try Again...");
     }
   }
 

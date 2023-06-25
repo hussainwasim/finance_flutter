@@ -34,8 +34,8 @@ class SignUpModel {
     if (response.statusCode == 200) {
       jsonResponse = response.body.toString();
       Map notificationResult = jsonDecode(jsonResponse.toString());
-      Utils.showTopSnackSuccessBar('User Registered  successfully ',
-          title: 'Success', color: Colors.green);
+      // Utils.showTopSnackSuccessBar('User Registered  successfully ',
+      //     title: 'Success', color: Colors.green);
       return Navigator.push(
           context,
           MaterialPageRoute(

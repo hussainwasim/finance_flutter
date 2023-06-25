@@ -64,11 +64,11 @@ class CustomerModel {
     if (response.statusCode == 200) {
       jsonResponse = response.body.toString();
       Map notificationResult = jsonDecode(jsonResponse.toString());
-      Utils.showTopSnackSuccessBar(
-        "Customer Added Successfully",
-        title: 'Success',
-        color: Colors.green,
-      );
+      // Utils.showTopSnackSuccessBar(
+      //   "Customer Added Successfully",
+      //   title: 'Success',
+      //   color: Colors.green,
+      // );
       return Navigator.push(
           context,
           MaterialPageRoute(

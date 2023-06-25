@@ -2,6 +2,7 @@ import 'package:fin/models/login_provider.dart';
 import 'package:fin/res/style/colors.dart';
 import 'package:fin/view/signup/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -28,9 +29,9 @@ class _LogInState extends State<LogIn> {
                   resizeToAvoidBottomInset: false,
                   body: SafeArea(
                     child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 18),
                       child: Container(
-                        margin: EdgeInsets.only(top: 25, bottom: 25),
+                        margin: EdgeInsets.only(top: 47, bottom: 25),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -54,8 +55,12 @@ class _LogInState extends State<LogIn> {
                                   fontWeight: FontWeight.w400,
                                   color: Color(0xFF5B5B5B),
                                 ))),
-                            Container(
-                              child: Image.asset('assets/images/login.png'),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 22),
+                              child: SizedBox(
+                                child: Image.asset('assets/images/login.png'),
+                              ),
                             ),
                             Form(
                               key: _loginFormKey,
@@ -222,15 +227,27 @@ class _LogInState extends State<LogIn> {
                             SizedBox(
                               height: 10,
                             ),
-                            Align(
-                              alignment: Alignment(0, 0),
-                              child: Text("Google",
-                                  style: GoogleFonts.poppins(
-                                      textStyle: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: textPrimary,
-                                  ))),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/images/google.svg',
+                                  height: 14,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Align(
+                                  alignment: Alignment(0, 0),
+                                  child: Text("Google",
+                                      style: GoogleFonts.poppins(
+                                          textStyle: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                        color: textPrimary,
+                                      ))),
+                                ),
+                              ],
                             ),
                             SizedBox(
                               height: 10,

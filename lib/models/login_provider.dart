@@ -48,6 +48,8 @@ class LoginProviderModel with ChangeNotifier {
               key: 'LOGIN_RESS', value: resBodyMap['data']['token'].toString());
           await _storage.write(
               key: 'User_Id', value: resBodyMap['user']['id'].toString());
+          await _storage.write(
+              key: 'User_role', value: resBodyMap['user']['role']);
           await StorageHelper.instance?.setString(
               StorageHelperString.loginUserData,
               json.encode(loginResponseData.toJson()));

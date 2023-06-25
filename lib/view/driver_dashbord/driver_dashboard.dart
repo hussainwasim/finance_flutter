@@ -705,7 +705,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                         }
                       });
                     } else {
-                      Utils.showTopSnackBar('You are already Punched In');
+                      // Utils.showTopSnackBar('You are already Punched In');
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -735,7 +735,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                         }
                       });
                     } else {
-                      Utils.showTopSnackBar('You are already Punched Out');
+                      //  Utils.showTopSnackBar('You are already Punched Out');
                     }
                   },
                   style: ElevatedButton.styleFrom(

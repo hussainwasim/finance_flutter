@@ -20,6 +20,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: <String, WidgetBuilder>{
+        '/admin': (context) => const AdminDashboard(),
+        '/driver': (context) => const DriverDashboard(),
+      },
       title: 'Finance',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
@@ -34,9 +38,9 @@ class MyApp extends StatelessWidget {
       // home: const DriverDashboard(),
       //home: const AddCustomer(),
       //home: const EmployeeList(),
-      //  home: const LogIn(),
+      home: const LogIn(),
       //home: const SignUp(),
-      home: const addFund(),
+      // home: const addFund(),
     );
   }
 }

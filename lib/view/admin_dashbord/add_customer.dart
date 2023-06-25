@@ -262,23 +262,23 @@ class _AddCustomerState extends State<AddCustomer> {
                               keyboardType: TextInputType.number,
                             ),
                           ),
-                          SizedBox(
-                            height: 50,
-                            child: TextField(
-                              controller: loanDuration,
-                              decoration: InputDecoration(
-                                hintText: "Enter Daily Loan Duration ",
-                                border: OutlineInputBorder(),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: textPrimary,
-                                  ),
-                                ),
-                              ),
-                              keyboardType: TextInputType.number,
-                            ),
-                          ),
-                          // TextField(
+                          // SizedBox(
+                          //   height: 50,
+                          //   child: TextField(
+                          //     controller: loanDuration,
+                          //     decoration: InputDecoration(
+                          //       hintText: "Enter Daily Loan Duration ",
+                          //       border: OutlineInputBorder(),
+                          //       focusedBorder: OutlineInputBorder(
+                          //         borderSide: BorderSide(
+                          //           color: textPrimary,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     keyboardType: TextInputType.number,
+                          //   ),
+                          // ),
+                          // // TextField(
                           //   controller: loanDuration,
                           //   decoration: InputDecoration(
                           //     hintText: "Enter Loan Starting Date",

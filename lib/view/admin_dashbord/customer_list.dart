@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:fin/res/style/colors.dart';
+import 'package:fin/view/admin_dashbord/admin_dashboard.dart';
+import 'package:fin/view/driver_dashbord/driver_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -20,6 +22,7 @@ class CustomerList extends StatefulWidget {
 class _CustomerListState extends State<CustomerList> {
   bool isUserLoading = false;
   static const storage = FlutterSecureStorage();
+  var role = storage.read(key: 'User_role');
   @override
   void initState() {
     // TODO: implement initState
@@ -65,7 +68,15 @@ class _CustomerListState extends State<CustomerList> {
               color: textPrimary,
             ),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => role == 1
+                      ? const DriverDashboard()
+                      : const AdminDashboard(),
+                ),
+                (route) => false,
+              );
             },
           ),
           elevation: 0,
