@@ -5,6 +5,7 @@ import 'package:fin/res/style/colors.dart';
 import 'package:fin/res/style/style.dart';
 import 'package:fin/res/style/typography.dart';
 import 'package:fin/view/admin_dashbord/customer_detail.dart';
+import 'package:fin/view/admin_dashbord/customer_list.dart';
 import 'package:fin/view/view_model/apiMethod.dart';
 import 'package:fin/widgets/customer_info_widget.dart';
 import 'package:fin/widgets/snackbar.dart';
@@ -70,14 +71,18 @@ class _addFundState extends State<addFund> {
         elevation: 0,
         leading: IconButton(
           onPressed: (() {
-            Navigator.pop(context);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CustomerList(),
+                ));
           }),
           icon: Icon(
             Icons.arrow_back,
             color: textPrimary,
           ),
         ),
-        title: Text("Add Fund",
+        title: Text("ADD FUND",
             style: GoogleFonts.inter(
                 textStyle: const TextStyle(
               fontWeight: FontWeight.w600,
@@ -93,7 +98,7 @@ class _addFundState extends State<addFund> {
           children: [
             CustomerCard(),
             SizedBox(
-              height: 10,
+              height: 30,
             ),
             RichText(
               text: TextSpan(
@@ -115,9 +120,9 @@ class _addFundState extends State<addFund> {
                 ],
               ),
             ),
-            // SizedBox(
-            //   height: 10,
-            // ),
+            SizedBox(
+              height: 20,
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -141,10 +146,20 @@ class _addFundState extends State<addFund> {
                           controller: addFund,
                           decoration: InputDecoration(
                             hintText: 'Enter Due Amount',
-                            border: OutlineInputBorder(),
+                            hintStyle: GoogleFonts.inter(
+                                textStyle: const TextStyle(
+                              //fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xFFB1B1B1),
+                            )),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFB1B1B1),
+                              ),
+                            ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: textPrimary,
+                                color: Color(0xFFB1B1B1),
                               ),
                             ),
                           ),
@@ -154,31 +169,27 @@ class _addFundState extends State<addFund> {
                     ),
                   ),
                   Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15),
-                      child: ElevatedButton(
-                        onPressed: (() {
-                          if (_formKey.currentState!.validate() && !isLoader) {
-                            _addFund();
-                          }
-                        }),
-                        child: Text(
-                          'ADD FUND',
-                          style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                            color: primaryWhite,
-                          )),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                            minimumSize: Size(double.infinity, 45),
-                            primary: primaryColor,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(66)),
-                            )),
+                    child: ElevatedButton(
+                      onPressed: (() {
+                        if (_formKey.currentState!.validate() && !isLoader) {
+                          _addFund();
+                        }
+                      }),
+                      child: Text(
+                        'ADD FUND',
+                        style: GoogleFonts.inter(
+                            textStyle: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18,
+                          color: primaryWhite,
+                        )),
                       ),
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size(double.infinity, 40),
+                          primary: primaryColor,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(66)),
+                          )),
                     ),
                   )
                 ],

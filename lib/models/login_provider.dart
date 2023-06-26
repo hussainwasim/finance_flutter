@@ -48,8 +48,8 @@ class LoginProviderModel with ChangeNotifier {
               key: 'LOGIN_RESS', value: resBodyMap['data']['token'].toString());
           await _storage.write(
               key: 'User_Id', value: resBodyMap['user']['id'].toString());
-          await _storage.write(
-              key: 'User_role', value: resBodyMap['user']['role']);
+          // await _storage.write(
+          //     key: 'User_Role', value: resBodyMap['user']['role']);
           await StorageHelper.instance?.setString(
               StorageHelperString.loginUserData,
               json.encode(loginResponseData.toJson()));
@@ -69,8 +69,8 @@ class LoginProviderModel with ChangeNotifier {
             (route) => false,
           );
         } else {
-          Utils.showSnackBar(context, resBodyMap['message'].toString());
-          Utils.showSnackBar(context, 'Invalid');
+          // Utils.showSnackBar(context, resBodyMap['message'].toString());
+          // Utils.showSnackBar(context, 'Invalid');
         }
         setLoading(false);
       } else {
@@ -79,7 +79,7 @@ class LoginProviderModel with ChangeNotifier {
         Map resBodyMap = jsonDecode(resBody);
 
         setLoading(false);
-        Utils.showTopSnackBar(resBodyMap["messages"]);
+        // Utils.showTopSnackBar(resBodyMap["messages"]);
       }
     }
   }

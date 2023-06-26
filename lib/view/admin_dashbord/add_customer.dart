@@ -1,4 +1,5 @@
 import 'package:fin/res/style/colors.dart';
+import 'package:fin/res/style/typography.dart';
 import 'package:fin/view/admin_dashbord/customer_list.dart';
 
 import 'package:flutter/material.dart';
@@ -50,6 +51,7 @@ class _AddCustomerState extends State<AddCustomer> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -62,7 +64,7 @@ class _AddCustomerState extends State<AddCustomer> {
             color: textPrimary,
           ),
         ),
-        title: Text("Add Customer",
+        title: Text("ADD CUSTOMER",
             style: GoogleFonts.inter(
                 textStyle: const TextStyle(
               fontWeight: FontWeight.w600,
@@ -87,7 +89,7 @@ class _AddCustomerState extends State<AddCustomer> {
             scrollDirection: Axis.vertical,
             physics: BouncingScrollPhysics(),
             child: Container(
-              height: 660,
+              height: SizeConfig.screenHeight! / 1.15,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -126,11 +128,15 @@ class _AddCustomerState extends State<AddCustomer> {
                                 color: textPrimary,
                               ))),
                           SizedBox(
-                            height: 50,
+                            height: 36,
                             child: TextFormField(
                                 controller: name,
                                 decoration: InputDecoration(
                                   hintText: "Enter Customer Name ",
+                                  hintStyle: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey[400],
+                                  ),
                                   border: OutlineInputBorder(),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -165,12 +171,16 @@ class _AddCustomerState extends State<AddCustomer> {
                                 color: textPrimary,
                               ))),
                           SizedBox(
-                            height: 50,
+                            height: 36,
                             child: TextFormField(
                               controller: contactNo,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
-                                hintText: "Enter Mobile Number",
+                                hintText: "Enter Customer Mobile Number ",
+                                hintStyle: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.grey[400],
+                                ),
                                 border: OutlineInputBorder(),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -191,22 +201,29 @@ class _AddCustomerState extends State<AddCustomer> {
                                 fontSize: 16,
                                 color: textPrimary,
                               ))),
-                          TextFormField(
-                            controller: address,
-                            decoration: InputDecoration(
-                              hintText: "Enter Address",
-                              border: OutlineInputBorder(),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: textPrimary,
+                          SizedBox(
+                            height: 84,
+                            child: TextFormField(
+                              controller: address,
+                              decoration: InputDecoration(
+                                hintText: "Enter Customer Address ",
+                                hintStyle: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.grey[400],
+                                ),
+                                border: OutlineInputBorder(),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: textPrimary,
+                                  ),
                                 ),
                               ),
+                              validator: (value) {
+                                MyValidators.validateEmptyFileds(
+                                    value ?? '', 'Address');
+                              },
+                              maxLines: 3,
                             ),
-                            validator: (value) {
-                              MyValidators.validateEmptyFileds(
-                                  value ?? '', 'Address');
-                            },
-                            maxLines: 3,
                           ),
                           Text("Loan Amount",
                               style: GoogleFonts.inter(
@@ -216,11 +233,15 @@ class _AddCustomerState extends State<AddCustomer> {
                                 color: textPrimary,
                               ))),
                           SizedBox(
-                            height: 50,
+                            height: 36,
                             child: TextFormField(
                               controller: loanAmount,
                               decoration: InputDecoration(
                                 hintText: "Enter Loan Amount ",
+                                hintStyle: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.grey[400],
+                                ),
                                 border: OutlineInputBorder(),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -243,11 +264,15 @@ class _AddCustomerState extends State<AddCustomer> {
                                 color: textPrimary,
                               ))),
                           SizedBox(
-                            height: 50,
+                            height: 36,
                             child: TextFormField(
                               controller: dailyDueAmount,
                               decoration: InputDecoration(
-                                hintText: "Enter Daily Loan Amount ",
+                                hintText: "Enter Daily Loan Amount",
+                                hintStyle: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.grey[400],
+                                ),
                                 border: OutlineInputBorder(),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -306,7 +331,7 @@ class _AddCustomerState extends State<AddCustomer> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(66),
                                   ),
-                                  minimumSize: Size(double.infinity, 45)),
+                                  minimumSize: Size(double.infinity, 40)),
                               child: Text('ADD CUSTOMER',
                                   style: GoogleFonts.inter(
                                       textStyle: const TextStyle(

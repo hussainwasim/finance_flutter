@@ -22,7 +22,7 @@ class CustomerList extends StatefulWidget {
 class _CustomerListState extends State<CustomerList> {
   bool isUserLoading = false;
   static const storage = FlutterSecureStorage();
-  var role = storage.read(key: 'User_role');
+  // var role = storage.read(key: 'User_Role');
   @override
   void initState() {
     // TODO: implement initState
@@ -55,13 +55,14 @@ class _CustomerListState extends State<CustomerList> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(
-            'Customer List',
-            style: TextStyle(
-              color: textPrimary,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          title: Text('CUSTOMER LIST ',
+              style: GoogleFonts.inter(
+                textStyle: const TextStyle(
+                  color: textPrimary,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
+              )),
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
@@ -71,12 +72,18 @@ class _CustomerListState extends State<CustomerList> {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => role == 1
-                      ? const DriverDashboard()
-                      : const AdminDashboard(),
-                ),
+                    builder: (context) => const DriverDashboard()),
                 (route) => false,
               );
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) =>  == 1
+              //         ? const DriverDashboard()
+              //         : const AdminDashboard(),
+              //   ),
+              //   (route) => false,
+              // );
             },
           ),
           elevation: 0,
@@ -117,7 +124,10 @@ class _CustomerListState extends State<CustomerList> {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      //
+                                      // MaterialPageRoute(
+                                      //   builder: (context) =>
+
+                                      // );
                                     },
                                     child: Container(
                                       width: MediaQuery.of(context).size.width *
@@ -129,7 +139,7 @@ class _CustomerListState extends State<CustomerList> {
                                       ),
                                       child: const Center(
                                         child: Text(
-                                          'Add Employee',
+                                          'Add Customer',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontSize: 16,

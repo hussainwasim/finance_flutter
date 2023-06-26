@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:fin/models/BaseClients.dart';
+import 'package:fin/view/admin_dashbord/admin_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 import '../../res/style/colors.dart';
+import '../driver_dashbord/driver_dashboard.dart';
 
 class EmployeeList extends StatefulWidget {
   const EmployeeList({super.key});
@@ -18,6 +20,7 @@ class EmployeeList extends StatefulWidget {
 class _EmployeeListState extends State<EmployeeList> {
   Future<EmployeeListModel> usersFuture = getUsers();
   static const storage = FlutterSecureStorage();
+  var role = storage.read(key: 'User_Role');
 
   @override
   void initState() {
@@ -47,7 +50,11 @@ class _EmployeeListState extends State<EmployeeList> {
         centerTitle: true,
         leading: IconButton(
           onPressed: (() {
-            Navigator.pop(context);
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const DriverDashboard()),
+              (route) => false,
+            );
           }),
           icon: Icon(
             Icons.arrow_back,

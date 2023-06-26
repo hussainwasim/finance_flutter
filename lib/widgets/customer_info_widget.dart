@@ -85,16 +85,17 @@ class _CustomerCardState extends State<CustomerCard> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                SizedBox(width: 10),
+                //SizedBox(width: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${_customerData['name'] ?? ''} / ${_customerData['customer_id'] ?? ''}",
+                      "${_customerData['name'] ?? ''} / ${_customerData['customer_id'] ?? ''}"
+                          .toUpperCase(),
                       style: GoogleFonts.inter(
                           textStyle: const TextStyle(
                         color: Color(0xFFFCFDFF),
-                        fontSize: 24,
+                        fontSize: 22,
                         fontWeight: FontWeight.w700,
                       )),
                     ),
@@ -131,7 +132,7 @@ class _CustomerCardState extends State<CustomerCard> {
                 ),
                 Image.asset('assets/images/mail.png'),
                 Text(
-                    "\t ${_customerData['email'] ?? '${_customerData['name']}@gmail.com'}",
+                    "\t ${_customerData['email'] ?? '${_customerData['name']}@gmail.com'.toLowerCase()}",
                     style: GoogleFonts.inter(
                         textStyle: const TextStyle(
                       fontSize: 12,
@@ -149,7 +150,7 @@ class _CustomerCardState extends State<CustomerCard> {
                       textStyle: const TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
-                    color: primaryWhite,
+                    color: Color(0xFFD7D7F1),
                   )),
                 ),
                 Text("₹ ${_customerData['loan_amount'] ?? ''}",
@@ -166,7 +167,7 @@ class _CustomerCardState extends State<CustomerCard> {
                     textStyle: const TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
-                  color: primaryWhite,
+                  color: Color(0xFFD7D7F1),
                 ))),
             Text("₹ ${_customerData['balance_amount'] ?? ''}",
                 style: GoogleFonts.inter(

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:fin/res/style/colors.dart';
 import 'package:fin/res/style/style.dart';
 import 'package:fin/res/style/typography.dart';
+import 'package:fin/view/admin_dashbord/add_employee.dart';
 import 'package:fin/view/admin_dashbord/customer_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -251,6 +252,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
     SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
+        //toolbarHeight: 70,
         centerTitle: true,
         leading: Padding(
           padding: const EdgeInsets.all(8.0),

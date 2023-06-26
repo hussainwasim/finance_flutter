@@ -1,4 +1,5 @@
 import 'package:fin/res/style/colors.dart';
+import 'package:fin/res/style/typography.dart';
 import 'package:fin/view/admin_dashbord/employee_list.dart';
 import 'package:fin/view/view_model/add_employee_model.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,7 @@ class _AddEmployeeState extends State<AddEmployee> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -63,7 +65,7 @@ class _AddEmployeeState extends State<AddEmployee> {
             color: textPrimary,
           ),
         ),
-        title: Text("Add Employee",
+        title: Text("ADD EMPLOYEE",
             style: GoogleFonts.inter(
                 textStyle: const TextStyle(
               fontWeight: FontWeight.w600,
@@ -88,10 +90,10 @@ class _AddEmployeeState extends State<AddEmployee> {
             scrollDirection: Axis.vertical,
             physics: BouncingScrollPhysics(),
             child: Container(
-              height: 660,
+              height: SizeConfig.screenHeight! / 1.15,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     width: 60,
@@ -127,11 +129,15 @@ class _AddEmployeeState extends State<AddEmployee> {
                                 color: textPrimary,
                               ))),
                           SizedBox(
-                            height: 50,
+                            height: 36,
                             child: TextFormField(
                                 controller: name,
                                 decoration: InputDecoration(
                                   hintText: "Enter Employee Name ",
+                                  hintStyle: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey[400],
+                                  ),
                                   border: OutlineInputBorder(),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -153,11 +159,15 @@ class _AddEmployeeState extends State<AddEmployee> {
                                 color: textPrimary,
                               ))),
                           SizedBox(
-                            height: 50,
+                            height: 36,
                             child: TextFormField(
                                 controller: email,
                                 decoration: InputDecoration(
                                   hintText: "Enter Employee Email ",
+                                  hintStyle: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey[400],
+                                  ),
                                   border: OutlineInputBorder(),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -179,12 +189,16 @@ class _AddEmployeeState extends State<AddEmployee> {
                                 color: textPrimary,
                               ))),
                           SizedBox(
-                            height: 50,
+                            height: 36,
                             child: TextFormField(
                               controller: mobileNo,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
-                                hintText: "Enter Mobile Number",
+                                hintText: "Enter Employee Mobile Number ",
+                                hintStyle: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.grey[400],
+                                ),
                                 border: OutlineInputBorder(),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -205,22 +219,35 @@ class _AddEmployeeState extends State<AddEmployee> {
                                 fontSize: 16,
                                 color: textPrimary,
                               ))),
-                          TextFormField(
-                            controller: address,
-                            decoration: InputDecoration(
-                              hintText: "Enter Address",
-                              border: OutlineInputBorder(),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: textPrimary,
+                          SizedBox(
+                            height: 84,
+                            child: TextFormField(
+                              controller: address,
+                              decoration: InputDecoration(
+                                hintText: "Enter Employee Address ",
+                                hintStyle: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.grey[400],
+                                ),
+                                errorBorder: OutlineInputBorder(),
+                                border: OutlineInputBorder(),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: textPrimary,
+                                  ),
                                 ),
                               ),
+                              validator: (value) {
+                                if (value == null ||
+                                    value.isEmpty ||
+                                    value == '') {
+                                  return 'Enter Employee Address';
+                                } else {
+                                  return null;
+                                }
+                              },
+                              maxLines: 3,
                             ),
-                            validator: (value) {
-                              MyValidators.validateEmptyFileds(
-                                  value ?? '', 'Address');
-                            },
-                            maxLines: 3,
                           ),
                           Text("Employee Password",
                               style: GoogleFonts.inter(
@@ -230,11 +257,16 @@ class _AddEmployeeState extends State<AddEmployee> {
                                 color: textPrimary,
                               ))),
                           SizedBox(
-                            height: 50,
+                            height: 36,
                             child: TextFormField(
                               controller: password,
                               decoration: InputDecoration(
                                 hintText: "Enter Employee Password ",
+                                hintStyle: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.grey[400],
+                                ),
+                                errorBorder: OutlineInputBorder(),
                                 border: OutlineInputBorder(),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -242,10 +274,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                                   ),
                                 ),
                               ),
-                              validator: (value) {
-                                MyValidators.validateEmptyFileds(
-                                    value ?? '', 'Employee Password');
-                              },
+                              validator: (value) {},
                             ),
                           ),
 
@@ -262,7 +291,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(66),
                                       ),
-                                      minimumSize: Size(double.infinity, 45)),
+                                      minimumSize: Size(double.infinity, 40)),
                                   child: Text('ADD EMPLOYEE',
                                       style: GoogleFonts.inter(
                                           textStyle: const TextStyle(
